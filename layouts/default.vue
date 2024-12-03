@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Loading />
-    <PageHeader />
     <main ref="mainContent">
       <slot />
     </main>

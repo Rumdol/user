@@ -2,7 +2,12 @@
 export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: false },
-
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   modules: [
     "@nuxtjs/eslint-module",
     "@pinia/nuxt",
@@ -13,7 +18,7 @@ export default defineNuxtConfig({
     "@element-plus/nuxt"
   ],
 
-  css: ["~/assets/scss/index.scss"],
+  css: ["~/assets/css/index.css"],
   elementPlus: { /** Options */ },
   runtimeConfig: {
     public: {
@@ -49,7 +54,6 @@ export default defineNuxtConfig({
   },
 
   plugins: [
-    { src: "~/plugins/bootstrap.js", mode: "client" }
   ],
 
   compatibilityDate: "2024-11-10"

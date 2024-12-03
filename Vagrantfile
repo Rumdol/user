@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
       vendor.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
       vendor.vm.network "private_network", ip: "192.168.33.10"
 
-      vendor.vm.synced_folder "E:/development/admin/api/local.nuxt", "/home/vagrant"
+      vendor.vm.synced_folder "E:/development/user", "/home/vagrant"
 
       vendor.vm.provision "shell", inline: <<-SCRIPT
         # Rename the vagrant user to vagrant
@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
 
 	  # vendor.vm.provision "shell", path: "C:/Users/mspt/provision/provision.ubuntu-docker.sh"
 	  # vendor.vm.provision "shell", path: "C:/Users/mspt/provision/provision.ubuntu-mysql.sh"
-	  vendor.vm.provision "shell", path: "C:/Users/mspt/provision/provision.ubuntu-node.sh"
+	  # vendor.vm.provision "shell", path: "C:/Users/mspt/provision/provision.ubuntu-node.sh"
 	  # vendor.vm.provision "shell", path: "C:/Users/mspt/provision/provision.ubuntu-php8.2.sh"
     end
 end
