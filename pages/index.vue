@@ -1,15 +1,9 @@
 <template>
-  <div class="container-fluid home-content">
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <el-button @click="navigateTo('/dashboard')">Go to Dashboard</el-button>
+  <div>
+    <h1 class="text-4xl font-bold text-center">Welcome to MyStore</h1>
+    <p class="text-center mt-4">Your one-stop shop for all your needs.</p>
   </div>
 </template>
-
 <script setup>
-useSeoMeta({ title: 'ITE | Home' })
+useSeoMeta({ title: 'Rumdul' });
 </script>
-
-<style scoped>
-</style>
