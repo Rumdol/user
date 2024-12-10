@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <h1 class="text-4xl font-bold text-center">Welcome to MyStore</h1>
-    <p class="text-center mt-4">Your one-stop shop for all your needs.</p>
-  </div>
+    <div class="container flex flex-col items-center justify-center gap-y-8">
+      <Banner />
+      <PromoItem />
+    </div>
+  
 </template>
+
 <script setup>
-useSeoMeta({ title: 'Rumdul' });
-definePageMeta({layout: "homepage",});
+import PromoItem from '~/components/PromoItem.vue'
+
+useSeoMeta({ title: 'Rumdul' })
+definePageMeta({ layout: 'homepage' })
 </script>

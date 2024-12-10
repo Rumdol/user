@@ -56,5 +56,7 @@ export default defineNuxtConfig({
   plugins: [
   ],
 
-  compatibilityDate: "2024-11-10"
+  compatibilityDate: "2024-11-10",
+
+  
 });
