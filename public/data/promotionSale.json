@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "image": "/images/perfume2.jpg",
+    "title": "Clearance Sale",
+    "discount": "70% OFF!",
+    "price": "$19.99"
+  },
+  {
+    "id": 2,
+      "image": "/images/perfume3.jpg",
+      "title": "Exclusive Offer",
+      "discount": "70% OFF!",
+      "price": "$19.99"
+    },
+    
+    {
+      "id": 3,
+      "image": "/images/perfume1.jpg",
+      "title": "Flash Sale",
+      "discount": "70% OFF!",
+      "price": "$19.99"
+    },
+    {
+      "id": 3,
+      "image": "/images/perfume1.jpg",
+      "title": "Flash Sale",
+      "discount": "70% OFF!",
+      "price": "$19.99"
+    },
+    {
+      "id": 3,
+      "image": "/images/perfume1.jpg",
+      "title": "Flash Sale",
+      "discount": "70% OFF!",
+      "price": "$19.99"
+    }
+  ]
+  
+  
