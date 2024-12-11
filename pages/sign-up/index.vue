@@ -20,15 +20,15 @@
         </el-form-item>
       </el-form>
       <div class="text-center my-4 text-gray-500">or</div>
-      <el-button 
-        type="success" 
-        class="w-full flex justify-center items-center gap-2" 
+      <el-button
+        type="success"
+        class="w-full flex justify-center items-center gap-2"
         @click="handleGoogleSignUp">
         <i class="fa fa-google"></i> Sign Up with Google
       </el-button>
       <p class="text-center text-sm mt-4">
-        Already have an account? 
-        <a href="/sign-in" class="text-blue-500">Login</a>
+        Already have an account?
+        <a @click="navigateTo('/sign-in')" class="text-blue-500">Login</a>
       </p>
     </div>
   </div>

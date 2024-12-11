@@ -15,7 +15,8 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     ["@vueuse/nuxt", { ssr: false }],
     ["@nuxtjs/sitemap"],
-    "@element-plus/nuxt"
+    "@element-plus/nuxt",
+    "@nuxt/icon",
   ],
 
   css: ["~/assets/css/index.css"],
@@ -58,5 +59,5 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2024-11-10",
 
-  
+
 });
