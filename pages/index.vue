@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-
 useSeoMeta({ title: 'Rumdul' })
 definePageMeta({ layout: 'homepage' })
 </script>

@@ -1,14 +1,18 @@
+import ProductService from '~/services/ProductService.js'
+
 export const useProductStore = defineStore('product', () => {
   const product = ref({});
+  const productService = ProductService.getInstance()
 
   const getProduct = async () => {
-    const service = await useService('Product');
-
-    const { data, error } = await service((module) => module.getProduct());
-    if (data) {
-      product.value = data;
-    } else if (error) {
-      console.error('Error fetching product:', error);
+    try {
+      const { data } = await productService.getProduct()
+      const { data: products} = data?.value?.data || {}
+      product.value = products
+      return products
+    } catch (error) {
+      ElMessage.error(error.message || 'Get product failed')
+      throw new Error(`Get product failed: ${error.message || 'Unknown error'}`)
     }
   };
 

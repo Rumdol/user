@@ -1,13 +1,17 @@
 <template>
-    <div>
-      <!-- Header -->
-      <el-affix  :offset="0">
+  <div>
+    <!-- Header -->
+    <el-affix :offset="0">
       <header class="bg-white text-black">
         <div class="container mx-auto flex items-center justify-between p-4">
           <!-- Logo -->
           <div class="logo flex items-center">
             <NuxtLink to="/">
-              <img src="/images/rumdulLogo.png" alt="Logo" class="h-20 w-auto" />
+              <img
+                src="/images/rumdulLogo.png"
+                alt="Logo"
+                class="h-20 w-auto"
+              />
             </NuxtLink>
           </div>
 
@@ -35,7 +39,7 @@
                   to="/wishlist"
                   class="hover:text-blue-400 flex items-center"
                 >
-                <i class="bx bx-heart text-2xl cursor-pointer"></i>
+                  <i class="bx bx-heart text-2xl cursor-pointer"></i>
                   <span class="ml-2">Wishlist</span>
                 </NuxtLink>
               </li>
@@ -45,7 +49,9 @@
                   to="/cart"
                   class="hover:text-blue-400 flex items-center"
                 >
-                  <el-icon class="cart-icon"><ShoppingBag /></el-icon>
+                  <el-icon class="cart-icon">
+                    <ShoppingBag />
+                  </el-icon>
                   <span class="ml-2">Cart</span>
                 </NuxtLink>
               </li>
@@ -59,15 +65,17 @@
                 <p>|</p>
               </li>
               <!-- Sign In -->
-              <li v-if="getme">
-                <p>account</p>
+              <li v-if="isLogin">
+                <p>Account</p>
               </li>
               <li v-else>
                 <NuxtLink
                   to="/sign-in"
                   class="hover:text-blue-400 flex items-center"
                 >
-                  <el-icon size="30"><UserFilled /></el-icon>
+                  <el-icon size="30">
+                    <UserFilled />
+                  </el-icon>
                   <span class="ml-2">Sign In</span>
                 </NuxtLink>
               </li>
@@ -76,58 +84,63 @@
         </div>
       </header>
     </el-affix>
-    </div>
-  </template>
-  <script setup>
-  const getme = ref(false);
-  </script>
-  <style scoped>
-  /* Icons */
-  .wishlist-icon,
-  .cart-icon {
-    font-size: 1.6rem;
-  }
+  </div>
+</template>
 
-  /* Search Bar */
-  .search-bar {
-    position: relative;
-    border: 1px solid #e2e8f0;
-    transition: box-shadow 0.4s ease;
-  }
+<script setup>
+defineProps({
+  isLogin: Boolean,
+});
+</script>
 
-  .search-bar:focus {
-    box-shadow: 0 0 0 2px #3b82f6;
-  }
+<style scoped>
+/* Icons */
+.wishlist-icon,
+.cart-icon {
+  font-size: 1.6rem;
+}
 
-  /* Navigation Links */
-  ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
+/* Search Bar */
+.search-bar {
+  position: relative;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.4s ease;
+}
 
-  li {
-    display: flex;
-    align-items: center;
-  }
+.search-bar:focus {
+  box-shadow: 0 0 0 2px #3b82f6;
+}
 
-  li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
+/* Navigation Links */
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
 
-  li a:hover {
-    color: #3b82f6;
-  }
-  .Search-el-cion  {
-    position: absolute;
-    left: 0.75rem; /* Adjust as per your preference */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem; /* Adjust size if necessary */
-    color: #6b7280; /* Light gray color for the icon */
-  }
-  </style>
+li {
+  display: flex;
+  align-items: center;
+}
+
+li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: #3b82f6;
+}
+
+.Search-el-cion {
+  position: absolute;
+  left: 0.75rem; /* Adjust as per your preference */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem; /* Adjust size if necessary */
+  color: #6b7280; /* Light gray color for the icon */
+}
+</style>

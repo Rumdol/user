@@ -3,7 +3,7 @@ import { useAuthPopupStore } from '~/store/auth-popup'
 export const useHttp = (url, options) => {
   const config = useRuntimeConfig()
   const baseURL = config.public.serverApiUrl + '/' + config.public.apiVersion
-  const cookie = useCookie('token')
+  const cookie = useCookie('access_token')
   const token = cookie.value
   const { showLoginPopup } = useAuthPopupStore()
   options = {
@@ -12,7 +12,6 @@ export const useHttp = (url, options) => {
       Authorization: `Bearer ${token}`,
       accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-SSDAP-Locale': 'en',
     },
     async onResponseError({ request, response, options }) {
       if (response.status === 401) {
