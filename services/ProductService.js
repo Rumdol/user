@@ -16,6 +16,9 @@ class ProductService extends BaseService {
   async getProduct() {
     return await this._get(`${this._prefix}`)
   }
+  async getwishlist() {
+    return await this._get(`${this._prefix}/wishlist`)
+  }
 }
 
 export default ProductService
