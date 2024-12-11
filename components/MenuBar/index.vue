@@ -1,5 +1,5 @@
 <template>
-  <nav class="py-4">
+  <nav class="py-1">
     <ul class="flex justify-center space-x-8">
       <li v-for="category in categories" :key="category.slug" class="text-black font-semibold hover:text-gray-400">
         <NuxtLink
@@ -26,6 +26,6 @@ ul {
 }
 
 li {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 </style>
