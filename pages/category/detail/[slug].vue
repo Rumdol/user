@@ -27,6 +27,9 @@
 
 
 <script setup>
+definePageMeta({
+  layout: 'homepage',
+});
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import categories from 'assets/categories.json';

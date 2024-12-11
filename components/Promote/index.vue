@@ -1,81 +1,105 @@
 <template>
-  <div class="promo-content container flex justify-center">
-    <div class="promotion-sale">
-      <div class="container flex justify-between">
-        <h2 class="text-2xl font-semibold mb-4">Super Sale</h2>
-        <h2 class="text-2xl font-semibold mb-4">See More</h2>
-      </div>
-      <div class="flex grid-cols-1 gap-4">
-        <div
-          v-for="promo in promotions"
-          :key="promo.id"
-          class="promo-item relative flex flex-col border p-4 rounded-md shadow-md"
-        >
-          <!-- Icon at Top-Right -->
-          <div class="absolute top-2 right-2">
-            <i class="bx bx-heart text-lg"></i>
+  <div class="promo-content container mx-auto py-8">
+    <!-- Header Section -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-bold">Super Sale</h2>
+      <a href="#" class="text-blue-500 hover:underline text-lg">See More</a>
+    </div>
+
+    <!-- Promotions Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div
+        v-for="promo in promotions"
+        :key="promo.id"
+        class="promo-item border rounded-lg overflow-hidden shadow hover:shadow-lg transition-all"
+      >
+        <!-- Image -->
+        <img
+          :src="promo.image"
+          alt="Promotion Sale"
+          class="w-full h-48 object-cover cursor-pointer"
+        />
+
+        <!-- Content -->
+        <div class="p-4">
+          <!-- Title and Icon -->
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="item-title text-lg font-semibold">{{ promo.title }}</h3>
           </div>
-
-          <!-- Image -->
-          <img
-            :src="promo.image"
-            alt="Promotion Sale"
-            class="w-full h-60 object-cover rounded-md"
-          />
-
-          <!-- Title -->
-          <h3 class="item-title text-xl mt-2">{{ promo.title }}</h3>
-
+          <!-- Rate -->
+          <h5 class="item-rate text-sm font-semibold">{{ promo.rate }}</h5>
           <!-- Discount -->
-          <p class="text-lg text-green-600 font-bold">{{ promo.discount }}</p>
+          <p class="text-green-600 font-bold text-sm mb-2">{{ promo.discount }}</p>
 
-          <!-- Price and Button -->
-          <div class="grid grid-flow-col justify-stretch">
-            <p class="item-price text-lg mt-2">{{ promo.price }}</p>
-            <el-button type="success">Buy Now</el-button>
+          <!-- Price and "In Stock" Button (Flex container) -->
+          <div class="flex justify-between items-center">
+            <p class="item-price text-lg font-semibold text-gray-800">{{ promo.price }}</p>
+            <el-tag
+              :type="promo.inStock === 'In Stock' ? 'success' : 'danger'"
+              effect="plain"
+              class="cursor-pointer"
+            >
+              {{ promo.inStock }}
+            </el-tag>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue';
 
 // Define ref for storing JSON data
-const promotions = ref([])
+const promotions = ref([]);
 
-// Fetch data from both JSON files
+// Fetch data from the JSON file
 onMounted(async () => {
-  const promotionResponse = await fetch('/data/promotionSale.json')
-  promotions.value = await promotionResponse.json()
-})
+  try {
+    const response = await fetch('/data/promotionSale.json');
+    promotions.value = await response.json();
+  } catch (error) {
+    console.error('Failed to fetch promotions:', error);
+  }
+});
 </script>
+
 <style scoped>
+/* Styling for Modern UI */
 .promo-content {
   width: 90%;
-  height: auto;
-  display: flex;
-  justify-content: left;
-  align-items: center;
+  margin: 0 auto;
 }
 .promo-item {
-  width: 22.5%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.item-tittle {
+.promo-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.item-title {
   color: #000;
+}
+.item-rate{
+  color: #edb424;
 }
 .item-price {
   color: #000;
 }
 .bx {
   width: 40px;
-  height: 30px;
+  height: 40px;
   background: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: color 0.2s ease;
+}
+.bx:hover {
+  color: #ff0000;
 }
 </style>

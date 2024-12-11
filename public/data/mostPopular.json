@@ -2,19 +2,22 @@
     {
       "id": 1,
       "image": "/images/perfume2.jpg",
-      "title": "Smartwatch X",
+      "title": "Savage Dior",
+      "rate": "4 star",
       "price": "$19.99"
     },
     {
-      "id": 2,
+      "id": 1,
       "image": "/images/perfume2.jpg",
-      "title": "Bluetooth Speaker Y",
+      "title": "Savage Dior",
+      "rate": "4 star",
       "price": "$19.99"
     },
     {
-      "id": 3,
-      "image": "/images/perfume3.jpg",
-      "title": "Gaming Headset Z",
+      "id": 1,
+      "image": "/images/perfume2.jpg",
+      "title": "Savage Dior",
+      "rate": "4 star",
       "price": "$19.99" 
     }
   ]

@@ -59,7 +59,10 @@
                 <p>|</p>
               </li>
               <!-- Sign In -->
-              <li>
+              <li v-if="getme">
+                <p>account</p>
+              </li>
+              <li v-else>
                 <NuxtLink
                   to="/sign-in"
                   class="hover:text-blue-400 flex items-center"
@@ -75,7 +78,9 @@
     </el-affix>
     </div>
   </template>
-
+  <script setup>
+  const getme = ref(false);
+  </script>
   <style scoped>
   /* Icons */
   .wishlist-icon,
