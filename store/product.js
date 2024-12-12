@@ -16,5 +16,19 @@ export const useProductStore = defineStore('product', () => {
     }
   };
 
-  return { product, getProduct };
+  const showProductbyId = async (productID) => {
+    try{
+      const {data} = await productService.fetchProductId(productID);
+      const { data: products} = data?.value?.data || {}
+      product.value = await products
+      return products;
+      console.log('API respones',data);
+    }catch (error) {
+      ElMessage.error(error.message || 'Failed to fetch product');
+      throw new Error(`Failed to fetch product: ${error.message || 'Unknown error'}`)
+    }
+  }
+
+  return { product,getProduct, showProductbyId };
+
 });

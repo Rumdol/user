@@ -3,7 +3,7 @@ import BaseService from './BaseService'
 let instance = null
 class ProductService extends BaseService {
   constructor() {
-    super('products')
+    super('product')
   }
 
   static getInstance() {
@@ -14,11 +14,15 @@ class ProductService extends BaseService {
   }
 
   async getProduct() {
-    return await this._get(`${this._prefix}`)
+    return await this._get(`${this._prefix}/all`)
   }
   async getwishlist() {
     return await this._get(`${this._prefix}/wishlist`)
   }
+  async fetchProductId(productID) {
+    return await this._get(`${this._prefix}/:product`);
+  }
+
 }
 
 export default ProductService

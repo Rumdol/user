@@ -32,6 +32,7 @@ onMounted(async () => {
     <div class="products-container">
       <h1 class="text-2xl font-bold mb-4 ">Product List</h1>
       <div class="flex gap-3">
+
         <!--filter section-->
         <section class="filter-container border-2 rounded-md p-2 h-auto bg-white  mb-4">
           <div class="w-[200px] ml-[50px]">
@@ -73,7 +74,7 @@ onMounted(async () => {
               <p class="font-semibold p-2">{{ product.title}}</p>
               <p class="ml-2">{{ product.size }} ml</p>
               <p class="ml-2">&dollar;{{ product.price }}</p>
-              <button v-on:click="navigateTo('/products/:id')" class="m-2 p-4 bg-cyan-300 text-white rounded flex items-center active:bg-opacity-50">
+              <button v-on:click="navigateTo('/products/' + product.id)" class="m-2 p-4 bg-cyan-300 text-white rounded flex items-center active:bg-opacity-50">
                 View Detail
               </button>
             </div>
