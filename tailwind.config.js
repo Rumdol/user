@@ -8,9 +8,17 @@ export default {
     "./app.vue",
     "./error.vue",
   ],
+
   theme: {
-    extend: {},
-  },
+    extend: {
+      colors: {
+        primary: {
+          light: '#2EC4B6',
+          DEFAULT: '#2EC4B6',
+          dark: '#2EC4B6',
+        },
+      },
+    },
+    },
   plugins: [],
 }
-

@@ -3,11 +3,11 @@
     <!-- Header Section -->
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-3xl font-bold">Most Sale</h2>
-      <a href="#" class="text-blue-500 hover:underline text-lg">See More</a>
+      <el-button @click="navigateTo('/products')" class="text-lg cursor-pointer">See More</el-button>
     </div>
 
     <!-- Promotions Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+    <div v-if="promotions" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
       <div
         v-for="promo in promotions"
         :key="promo.id"
@@ -43,6 +43,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div v-else class="h[212px]">
+      adw
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
     <!-- Header Section -->
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-3xl font-bold">Super Sale</h2>
-      <a href="#" class="text-blue-500 hover:underline text-lg">See More</a>
+      <el-button @click="navigateTo('/products')" class="text-lg cursor-pointer">See More</el-button>
     </div>
 
     <!-- Promotions Grid -->

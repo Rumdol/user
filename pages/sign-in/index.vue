@@ -49,7 +49,7 @@
 
       <p class="text-center text-sm mt-4">
         Don’t have an account?
-        <a @click="navigateTo('/sign-up')" class="text-blue-500">Sign Up</a>
+        <a @click="navigateTo('/sign-up')" class="text-blue-500 cursor-pointer">Sign Up</a>
       </p>
     </div>
   </div>

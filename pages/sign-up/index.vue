@@ -16,7 +16,7 @@
           <el-input v-model="registerForm.confirmPassword" type="password" placeholder="Confirm your password" show-password></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="w-full" @click="handleRegister">Sign Up</el-button>
+          <el-button type="primary" class="w-full cursor-pointer " @click="handleRegister">Sign Up</el-button>
         </el-form-item>
       </el-form>
       <div class="text-center my-4 text-gray-500">or</div>
@@ -28,7 +28,7 @@
       </el-button>
       <p class="text-center text-sm mt-4">
         Already have an account?
-        <a @click="navigateTo('/sign-in')" class="text-blue-500">Login</a>
+        <a @click="navigateTo('/sign-in')" class="text-blue-500 cursor-pointer ">Sign In</a>
       </p>
     </div>
   </div>
