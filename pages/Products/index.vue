@@ -1,110 +1,243 @@
 <script setup>
-import { ref, computed, onMounted} from 'vue';
+import { ref, computed, onMounted } from 'vue'
 import { useProductStore } from '~/store/product.js'
 
-// Define reactive properties
-const filterOption = ref('');
-const sortOrder = ref('');
-const currentPage = ref(1);
-const itemsPerPage = 20;
-const products = ref([]);
-const filterQuery = ref('');
+const filterOption = ref({
+  name: '',
+  size: '',
+  priceRange: [0, 1000], // This will hold the min_price and max_price as an array
+})
 
+const sortOrder = ref('ascending')
+const currentPage = ref(1)
+const products = ref([])
+const productStore = useProductStore()
+const { getProduct } = productStore
+const collapse = ref(true)
 
-const productStore = useProductStore();
+const totalPages = ref()
 
-const fetchProduct = async () => {
+const fetchProduct = async (params) => {
   try {
-    await productStore.getProduct(); // Wait for the API call to complete
-    products.value = productStore.product; // Assign the data after the call finishes
+    const productList = await getProduct(params)
+    products.value = productList.data // Adjusted to fetch the products from the data object
+    currentPage.value = productList.current_page // Current page from the API response
+    totalPages.value = productList.last_page // Last page from the API response
   } catch (error) {
-    console.error('Error fetching product:', error);
+    ElMessage.error('Failed to fetch product')
   }
-};
+}
 
-onMounted(async () => {
-  await fetchProduct(); // Ensure the API call finishes before proceeding
-  console.log('Product:', products.value); // Log the data after it has been assigned
-});
+const filterProducts = async () => {
+  const min_price = filterOption.value.priceRange[0]
+  const max_price = filterOption.value.priceRange[1]
+  const params = {
+    min_price,
+    max_price,
+  }
+  fetchProduct(params)
+  let filteredProducts = products.value
+
+  if (filterOption.value.name) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.name
+        .toLowerCase()
+        .includes(filterOption.value.name.toLowerCase()),
+    )
+  }
+
+  if (filterOption.value.size) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.size === filterOption.value.size,
+    )
+  }
+
+  if (
+    filterOption.value.min_price !== null &&
+    filterOption.value.max_price !== null
+  ) {
+    const { min_price, max_price } = filterOption.value.priceRange
+    filteredProducts = filteredProducts.filter(
+      (product) => product.price >= min_price && product.price <= max_price,
+    )
+  }
+
+  products.value = filteredProducts
+}
+
+const sortProducts = () => {
+  if (sortOrder.value) {
+    products.value.sort((a, b) => {
+      if (sortOrder.value === 'ascending') {
+        return a.price - b.price
+      } else {
+        return b.price - a.price
+      }
+    })
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    fetchProduct({ page: currentPage.value - 1 })
+  }
+}
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    fetchProduct({ page: currentPage.value + 1 })
+  }
+}
+
+onMounted(() => {
+  fetchProduct()
+})
 </script>
 
 <template>
-    <div class="products-container">
-      <h1 class="text-2xl font-bold mb-4 ">Product List</h1>
-      <div class="flex gap-3">
+  <div class="products-container px-4 md:px-8 lg:px-12">
+    <h1 class="text-2xl font-bold mb-6">Product List</h1>
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Filter section -->
+      <section
+        class="filter-container border-2 rounded-md p-4 h-auto bg-white w-full lg:w-1/4"
+      >
+        <div class="mb-6">
+          <div class="flex justify-between">
+            <p class="font-bold mb-4">Filter by</p>
+            <el-button
+              type="primary"
+              @click="collapse = !collapse"
+              ></el-button>
+          </div>
 
-        <!--filter section-->
-        <section class="filter-container border-2 rounded-md p-2 h-auto bg-white  mb-4">
-          <div class="w-[200px] ml-[50px]">
-            <p class="font-bold mb-2">Filter by</p>
-            <ul  class="ml-4">
-              <li>
-                <input type="radio" id="name" value="name" v-model="filterOption" @change="filterProducts">
-                <label for="name"> Name</label>
-              </li>
-              <li>
-                <input type="radio" id="size" value="size" v-model="filterOption" @change="filterProducts">
-                <label for="size"> Size</label>
-              </li>
-              <li>
-                <input type="radio" id="price" value="price" v-model="filterOption" @change="filterProducts">
-                <label for="price"> Price</label>
-              </li>
-            </ul>
-          </div>
-          <div class="w-[200px] ml-[50px] mt-[20px]">
-            <p class="font-bold mb-2">Sort by</p>
-            <ul class="ml-4">
-              <li>
-                <input type="radio" id="ascending" value="ascending" v-model="sortOrder" @change="sortProducts">
-                <label for="ascending"> Ascending</label>
-              </li>
-              <li>
-                <input type="radio" id="descending" value="descending" v-model="sortOrder" @change="sortProducts">
-                <label for="descending"> Descending</label>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <!-- Product list -->
-        <section>
-          <div class="grid grid-cols-4 gap-6 ml-6 w-[1300px] h-auto">
-            <div v-for="product in products" :key="product.id" class="border-2 border-gray-200 rounded-md">
-              <img :src="product.image" alt="product image" class="w-[350px] h-[350px] object-cover  border-b-2 border-gray-200  " />
-              <p class="font-semibold p-2">{{ product.title}}</p>
-              <p class="ml-2">{{ product.size }} ml</p>
-              <p class="ml-2">&dollar;{{ product.price }}</p>
-              <button v-on:click="navigateTo('/products/' + product.id)" class="m-2 p-4 bg-cyan-300 text-white rounded flex items-center active:bg-opacity-50">
-                View Detail
-              </button>
+          <div v-if="collapse" class="flex flex-col">
+            <!-- Product Name Filter -->
+            <div class="flex flex-col gap-2 mb-4">
+              <label for="product-name">Name</label>
+              <el-input
+                v-model="filterOption.name"
+                placeholder="Enter Name"
+                class="mb-4"
+                @change="filterProducts"
+              />
+            </div>
+
+            <div class="flex flex-col gap-2 mb-4">
+              <label for="product-size">Size</label>
+              <el-select
+                v-model="filterOption.size"
+                placeholder="Select Size"
+                class="mb-4"
+                @change="filterProducts"
+              >
+                <el-option label="Small" value="small" />
+                <el-option label="Medium" value="medium" />
+                <el-option label="Large" value="large" />
+              </el-select>
+            </div>
+
+            <div class="flex flex-col gap-2 mb-4">
+              <label for="product-price">Price</label>
+              <el-slider
+                v-model="filterOption.priceRange"
+                range
+                class="mb-4"
+                :min="0"
+                :max="1000"
+                :step="1"
+                show-tooltip
+                @change="filterProducts"
+              />
+
+              <div class="flex justify-between text-sm">
+                <span>Min: ${{ filterOption.priceRange[0] }}</span>
+                <span>Max: ${{ filterOption.priceRange[1] }}</span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <p class="font-bold mb-4">Sort by Price</p>
+              <el-radio-group v-model="sortOrder" @change="sortProducts">
+                <el-radio value="ascending">Ascending</el-radio>
+                <el-radio value="descending">Descending</el-radio>
+              </el-radio-group>
             </div>
           </div>
-
-          <div class="pagination flex justify-between items-center mt-6">
-            <button @click="prevPage" :disabled="currentPage === 1" class="w-[100px] px-2 py-2 border-2 border-blue-200 text-blue-400 rounded active:text-opacity-30">Previous</button>
-            <p>{{currentPage}}/{{totalPages}} Page</p>
-            <button @click="nextPage" :disabled="currentPage === totalPages" class="w-[100px] px-2 py-2 border-2 border-blue-200 text-blue-400 rounded active:text-opacity-30">Next</button>
           </div>
-        </section>
-      </div>
+
+
+      </section>
+
+      <!-- Product list -->
+      <section v-if="products" class="w-full lg:w-2/2">
+        <ProductCard :products="products" />
+        <!-- Pagination -->
+        <div class="pagination flex justify-between items-center mt-6">
+          <el-button
+            @click="prevPage"
+            :disabled="currentPage === 1"
+            class="w-[100px] text-blue-400 border-blue-200"
+          >
+            Previous
+          </el-button>
+          <div class="page-numbers flex gap-2">
+            <el-button
+              v-for="page in Array.from(
+                { length: totalPages },
+                (_, i) => i + 1,
+              )"
+              :key="page"
+              :class="page === currentPage ? 'btn-action' : 'btn-inactive'"
+              @click="fetchProduct({ page })"
+            >
+              {{ page }}
+            </el-button>
+          </div>
+          <el-button
+            @click="nextPage"
+            :disabled="currentPage === totalPages"
+            class="w-[100px] text-blue-400 border-blue-200"
+          >
+            Next
+          </el-button>
+        </div>
+      </section>
     </div>
+  </div>
 </template>
 
-
 <style scoped>
-.filter-container{
-  width: 500px;
+.btn-action {
+  cursor: pointer;
+  background-color: #2ec4b6;
+  color: white;
+  padding: 10px 20px;
 }
+
+.btn-inactive {
+  cursor: pointer;
+  background-color: #f1f1f1;
+  color: black;
+  padding: 10px 20px;
+}
+
+.filter-container {
+  animation: content-animation 1s;
+  font-family: Inter, sans-serif;
+}
+
 .products-container {
   animation: content-animation 1s;
-  font-family: Inter , sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 @keyframes content-animation {
-  from{
+  from {
     opacity: 0;
-  }to{
-  opacity: 100;
-     }
+  }
+  to {
+    opacity: 100;
+  }
 }
 </style>
