@@ -20,16 +20,6 @@
     ]
   },
   {
-    "slug": "men",
-    "name": "Men",
-    "description": "Men",
-    "products": [
-      { "id": 7, "name": "T-shirt" },
-      { "id": 8, "name": "Jeans" },
-      { "id": 9, "name": "Sneakers" }
-    ]
-  },
-  {
     "slug": "new-arrival",
     "name": "New Arrival",
     "description": "New Arrival",
@@ -48,15 +38,6 @@
       { "id": 14, "name": "Board Games" },
       { "id": 15, "name": "Dolls" }
     ]
-  },
-  {
-    "slug": "women",
-    "name": "Women",
-    "description": "Women",
-    "products": [
-      { "id": 13, "name": "Women Action Figures" },
-      { "id": 14, "name": "women" },
-      { "id": 15, "name": "women women" }
-    ]
   }
+  
 ]

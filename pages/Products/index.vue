@@ -1,4 +1,6 @@
 <script setup>
+useSeoMeta({ title: 'Product' })
+definePageMeta({ layout: 'homepage' })
 import { ref, computed, onMounted } from 'vue'
 import { useProductStore } from '~/store/product.js'
 

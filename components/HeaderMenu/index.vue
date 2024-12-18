@@ -24,7 +24,7 @@
                 <input
                   type="text"
                   placeholder="Search for products..."
-                  class="search-bar w-full px-4 py-2 rounded-full text-gray-700 outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 pl-10"
+                  class="search-bar w-full px-4 py-2 rounded-full text-gray-700 outline-none focus:outline-none focus:ring-2 pl-10"
                 />
                 <!-- Element Plus search icon inside the input field -->
                 <el-icon
@@ -35,29 +35,21 @@
               </li>
               <!-- Wishlist -->
               <li>
-                <NuxtLink
-                  to="/wishlist"
-                  class="hover:text-blue-400 flex items-center"
-                >
-                  <i class="bx bx-heart text-2xl cursor-pointer"></i>
+                <NuxtLink to="/wishlist">
+                <Icon name="uil:heart" style="color: black"  />
                   <span class="ml-2">Wishlist</span>
                 </NuxtLink>
               </li>
               <!-- Cart -->
               <li>
-                <NuxtLink
-                  to="/cart"
-                  class="hover:text-blue-400 flex items-center"
-                >
-                  <el-icon class="cart-icon">
-                    <ShoppingBag />
-                  </el-icon>
+                <NuxtLink to="/cart">
+                  <Icon name="uil:cart" style="color: black" />
                   <span class="ml-2">Cart</span>
                 </NuxtLink>
-              </li>
+              </li> 
               <!-- Join Business -->
               <li>
-                <NuxtLink to="/join-business" class="hover:text-blue-400">
+                <NuxtLink to="/join-business" >
                   <p class="business">Join Business</p>
                 </NuxtLink>
               </li>
@@ -66,16 +58,12 @@
               </li>
               <!-- Sign In -->
               <li v-if="isLogin">
-                <p>Account</p>
+                <NuxtLink to="/profile">
+                  <span class="ml-2">Profile</span>
+                </NuxtLink>
               </li>
               <li v-else>
-                <NuxtLink
-                  to="/sign-in"
-                  class="hover:text-blue-400 flex items-center"
-                >
-                  <el-icon size="30">
-                    <UserFilled />
-                  </el-icon>
+                <NuxtLink to="/sign-in">
                   <span class="ml-2">Sign In</span>
                 </NuxtLink>
               </li>
@@ -108,7 +96,7 @@ defineProps({
 }
 
 .search-bar:focus {
-  box-shadow: 0 0 0 2px #3b82f6;
+  box-shadow: 0 0 0 2px #2ec4b6;
 }
 
 /* Navigation Links */
@@ -132,8 +120,10 @@ li a {
 }
 
 li a:hover {
-  color: #3b82f6;
+  color: #2ec4b6;
 }
+
+
 
 .Search-el-cion {
   position: absolute;
@@ -142,5 +132,8 @@ li a:hover {
   transform: translateY(-50%);
   font-size: 1.2rem; /* Adjust size if necessary */
   color: #6b7280; /* Light gray color for the icon */
+}
+.text-hover{
+  color: #000;
 }
 </style>

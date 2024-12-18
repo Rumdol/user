@@ -1,0 +1,14 @@
+[
+    { 
+        "slug": "home", 
+        "name": "Homepage"
+    },
+    { 
+        "slug": "product", 
+        "name": "All Product"
+    },
+    { 
+        "slug": "promotion", 
+        "name": "Promotion"
+    }
+]
