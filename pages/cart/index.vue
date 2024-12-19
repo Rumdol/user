@@ -8,4 +8,6 @@
 
 <script setup>
 useSeoMeta({ title: 'Rumdul | Cart' });
+definePageMeta({ layout: 'default' })
+
 </script>

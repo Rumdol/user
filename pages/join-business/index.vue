@@ -5,7 +5,7 @@
   </template>
   <script setup>
   useSeoMeta({ title: 'Rumdul | Join Business' });
-  definePageMeta({layout: "join-business",});
+  definePageMeta({layout: "auth.vue",});
   </script>
 
   

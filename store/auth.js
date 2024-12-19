@@ -12,7 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
   const login = async (credentials) => {
     try {
       const { data } = await authService.login(credentials)
-      const { user: userData, token: authToken } = data?.value?.data || {}
+      const { user: userData, token: authToken } = data || {}
 
       if (!authToken) {
         throw new Error('Invalid Credentials')
