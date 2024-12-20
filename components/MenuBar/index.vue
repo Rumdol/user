@@ -38,6 +38,12 @@
         </NuxtLink>
       </li>
       <li>
+        <NuxtLink to="/store"
+          class="menu-hover">
+          Store
+        </NuxtLink>
+      </li>
+      <li>
         <NuxtLink to="/about-us"
           class="menu-hover">
           About Us
