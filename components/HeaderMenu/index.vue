@@ -36,20 +36,24 @@
               <!-- Wishlist -->
               <li>
                 <NuxtLink to="/wishlist">
-                <Icon name="uil:heart" style="color: black"  />
+                  <el-badge is-dot class="item-dot">
+                    <Icon name="uil:heart" class="header-icon" />
+                  </el-badge>
                   <span class="ml-2">Wishlist</span>
                 </NuxtLink>
               </li>
               <!-- Cart -->
               <li>
                 <NuxtLink to="/cart">
-                  <Icon name="uil:cart" style="color: black" />
+                  <el-badge :value="0" class="item" color="red">
+                    <Icon name="uil:cart" class="header-icon" />
+                  </el-badge>
                   <span class="ml-2">Cart</span>
                 </NuxtLink>
-              </li> 
+              </li>
               <!-- Join Business -->
               <li>
-                <NuxtLink to="/join-business" >
+                <NuxtLink to="/join-business">
                   <p class="business">Join Business</p>
                 </NuxtLink>
               </li>
@@ -58,8 +62,8 @@
               </li>
               <!-- Sign In -->
               <li v-if="isLogin">
-                <NuxtLink to="/profile">
-                  <span class="ml-2">Profile</span>
+                <NuxtLink to="/profile" class="profile">
+                  <Icon name="uil:user" class="header-icon" />
                 </NuxtLink>
               </li>
               <li v-else>
@@ -78,14 +82,14 @@
 <script setup>
 defineProps({
   isLogin: Boolean,
-});
+})
 </script>
 
 <style scoped>
 /* Icons */
-.wishlist-icon,
-.cart-icon {
+.header-icon {
   font-size: 1.6rem;
+  color: #000;
 }
 
 /* Search Bar */
@@ -123,8 +127,6 @@ li a:hover {
   color: #2ec4b6;
 }
 
-
-
 .Search-el-cion {
   position: absolute;
   left: 0.75rem; /* Adjust as per your preference */
@@ -133,7 +135,17 @@ li a:hover {
   font-size: 1.2rem; /* Adjust size if necessary */
   color: #6b7280; /* Light gray color for the icon */
 }
-.text-hover{
+.text-hover {
   color: #000;
+}
+
+.profile{
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #989696;
 }
 </style>

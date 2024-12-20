@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex justify-center items-center" style="height: 100vh;">
+  <div class="container flex justify-center items-center" style="height: 100vh">
     <div class="login-body">
       <div class="other-information">
         <img src="/images/rumdulLogo.png" alt="Rumdul Logo" />
@@ -10,7 +10,7 @@
           Sign In your account here!
         </h1>
         <el-form
-          :model="loginForm"  
+          :model="loginForm"
           :rules="rules"
           ref="loginFormRef"
           label-position="top"
@@ -45,16 +45,18 @@
         </el-form>
 
         <div class="text-center my-4 text-gray-500">or login with</div>
-        <button
-          class="w-full flex justify-center items-center gap-2"
-          @click="handleGoogleLogin"
-        >
-          <img
-            src="/images/google.jpg"
-            class="google-icon-image"
-            alt="google image icon"
-          />
-        </button> 
+        <div class="google-login">
+          <button
+            class="button-google flex justify-center items-center gap-2"
+            @click="handleGoogleLogin"
+          >
+            <img
+              src="/images/google.jpg"
+              class="google-icon-image"
+              alt="google image icon"
+            />
+          </button>
+        </div>
         <p class="text-center text-sm mt-4">
           Don’t have an account?
           <a
@@ -63,7 +65,6 @@
             >Sign Up</a
           >
         </p>
-        
       </div>
     </div>
   </div>
@@ -170,7 +171,9 @@ const handleGoogleLogin = () => {
   text-align: center; /* Centers text alignment */
   padding: 10px 20px; /* Adds some padding for better readability */
   border-radius: 8px; /* Optional: Adds rounded corners */
-  font-family: Stencil Std, fantasy;
+  font-family:
+    Stencil Std,
+    fantasy;
 }
 .google-icon-image {
   width: 30px;
@@ -187,5 +190,13 @@ const handleGoogleLogin = () => {
 .login-button:hover {
   color: #fff;
   background: #2ec4b6;
+}
+.google-login{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.button-google {
+  width: 30px;
 }
 </style>
