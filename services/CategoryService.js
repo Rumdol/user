@@ -1,0 +1,33 @@
+import BaseService from './BaseService'
+
+let instance = null
+class CategoryService extends BaseService {
+  constructor() {
+    super('category')
+  }
+
+  static getInstance() {
+    if (!instance) {
+      instance = new CategoryService()
+    }
+    return instance
+  }
+
+  async getCategory(payload = {}) {
+    //per_page
+    const params = {
+      page: payload.page || 1,
+      per_page: payload.per_page || 5,
+    };
+
+    // Convert the params object into a query string
+    const queryString = new URLSearchParams(params).toString();
+
+    // Make the API call with the query parameters
+    return await this._get(`${this._prefix}?${queryString}`, {});
+  }
+
+
+}
+
+export default CategoryService
