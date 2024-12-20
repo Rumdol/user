@@ -51,6 +51,11 @@
                   <span class="ml-2">Cart</span>
                 </NuxtLink>
               </li>
+              <li>
+                <NuxtLink to="/order">
+                  <span class="ml-2">Or</span>
+                </NuxtLink>
+              </li>
               <!-- Join Business -->
               <li>
                 <NuxtLink to="/join-business">
