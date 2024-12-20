@@ -31,9 +31,41 @@
             <p v-if="product.discount > 0" class="text-red-500">Discount: {{ product.discount }}%</p>
           </div>
 
-          <el-button type="primary" class="buy-now-btn" size="large">
-            Buy Now
-          </el-button>
+          <div class="flex items-center gap-4">
+            <!-- Quantity Selector -->
+            <div class="flex items-center border border-gray-300 rounded overflow-hidden">
+              <button
+                class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600"
+                @click="decreaseAmount"
+                :disabled="amount <= 1"
+              >
+                -
+              </button>
+              <input
+                type="number"
+                class="w-12 text-center border-0 outline-none"
+                v-model.number="amount"
+                min="1"
+              />
+              <button
+                class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600"
+                @click="increaseAmount"
+              >
+                +
+              </button>
+            </div>
+
+            <!-- Add to Cart Button -->
+            <el-button
+              type="primary"
+              class="buy-now-btn"
+              size="large"
+              @click="addToCart(productId)"
+            >
+              Add to Cart
+            </el-button>
+          </div>
+
         </div>
       </div>
     </el-card>
@@ -86,14 +118,15 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useProductStore } from '~/store/product.js';
+import { useCartStore } from '~/store/cart.js';
 
 const route = useRoute();
-const router = useRouter();
 const productId = route.params.id;
 const product = ref(null);
 const productStore = useProductStore();
+const cartStore = useCartStore();
 
 const fetchProduct = async (productId) => {
   try {
@@ -103,10 +136,42 @@ const fetchProduct = async (productId) => {
   }
 };
 
-const navigateTo = (path) => {
-  router.push(path);
+// Add to cart logic
+const amount = ref(1);
+
+const increaseAmount = () => {
+  amount.value++;
 };
 
+const decreaseAmount = () => {
+  if (amount.value > 1) {
+    amount.value--;
+  }
+};
+
+const addToCart = async () => {
+  try {
+    const params = {
+      product: productId, // Pass the product ID from the route
+      count: amount.value, // Pass the quantity
+    };
+    console.log('Adding to cart with params:', params);
+
+    // Call the cartStore's addCart method (action)
+    const response = await cartStore.addCart(params);
+
+    // Log the updated cart state or API response
+    console.log('Cart updated:', response);
+    ElMessage.success('Product added to cart successfully');
+    return response;
+
+  } catch (error) {
+    console.error('Failed to add product to cart:', error.message);
+    ElMessage.error(`Failed to add product to cart: ${error.message}`);
+  }
+};
+
+// Fetch the product data when the component is mounted
 onMounted(() => {
   if (!productId) {
     navigateTo('/products');

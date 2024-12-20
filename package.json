@@ -31,10 +31,12 @@
     "nuxt": "^3.9.0",
     "postcss": "^8.4.49",
     "prettier": "^3.2.4",
+    "sass": "1.77.6",
     "tailwindcss": "^3.4.15",
     "vue": "^3.3.12",
     "vue-i18n": "^9.2.2",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "nuxt-paypal": "^0.0.1-beta"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
