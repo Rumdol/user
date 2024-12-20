@@ -57,14 +57,6 @@
             />
           </el-form-item>
 
-          <!-- Logo -->
-          <el-form-item label="Logo URL" prop="logo">
-            <el-input
-              v-model="businessForm.logo"
-              placeholder="Paste your logo URL here"
-            />
-          </el-form-item>
-
           <!-- Email -->
           <el-form-item label="Email" prop="email">
             <el-input
@@ -92,6 +84,9 @@ import { ElMessage } from 'element-plus'
 useSeoMeta({ title: 'Rumdul | Join Business' })
 definePageMeta({ layout: 'auth' })
 
+import { useRequestVendorStore } from '~/store/request.js'
+const requestVendorStore = useRequestVendorStore()
+
 // Form Data and Rules
 const businessForm = ref({
   name: '',
@@ -99,7 +94,6 @@ const businessForm = ref({
   address: '',
   description: '',
   purpose: '',
-  logo: '',
   email: '',
 })
 
@@ -131,22 +125,32 @@ const rules = {
   purpose: [
     { required: true, message: 'Please specify your purpose', trigger: 'blur' },
   ],
-  logo: [
-    { required: true, message: 'Please enter your logo URL', trigger: 'blur' },
-  ],
   email: [
     { required: true, message: 'Please enter your email', trigger: 'blur' },
     { type: 'email', message: 'Please enter a valid email', trigger: 'blur' },
   ],
 }
 
+// Define the form reference
+const businessFormRef = ref(null)
+
 // Handle Submit
 const handleSubmit = () => {
-  const businessFormRef = ref(null)
-  businessFormRef.value.validate((valid) => {
+  if (!businessFormRef.value) return; // Ensure the form ref exists
+  businessFormRef.value.validate(async (valid) => {
     if (valid) {
       ElMessage.success('Business registration submitted successfully!')
       // Add submission logic here (e.g., API call)
+      await requestVendorStore.requestVendor({
+        name: businessForm.value.name,
+        slug: businessForm.value.slug,
+        address: businessForm.value.address,
+        description: businessForm.value.description,
+        purpose: businessForm.value.purpose,
+        email: businessForm.value.email,
+      })
+      navigateTo('/')
+      ElMessage.success('Registration successful')
     } else {
       ElMessage.error('Please fill in the form correctly.')
     }

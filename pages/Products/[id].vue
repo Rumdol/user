@@ -69,6 +69,42 @@
         </div>
       </div>
     </el-card>
+
+    <!-- Related Products Section -->
+    <div class="related-products mt-12">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Related Products</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <el-card
+          v-for="relatedProduct in product.related_products"
+          :key="relatedProduct.id"
+          class="relative hover:shadow-lg"
+        >
+          <el-image
+            :src="relatedProduct.image"
+            fit="cover"
+            class="w-full h-48 rounded-lg"
+          ></el-image>
+          <div class="mt-4">
+            <h3 class="text-lg font-semibold text-gray-700">{{ relatedProduct.title }}</h3>
+            <p class="text-gray-500 text-sm">{{ relatedProduct.description }}</p>
+            <p class="text-green-600 text-lg font-bold mt-2">
+              &dollar;{{ relatedProduct.price }}
+            </p>
+            <p v-if="relatedProduct.discount > 0" class="text-red-500 text-sm">
+              Discount: {{ relatedProduct.discount }}%
+            </p>
+          </div>
+          <el-button
+            type="primary"
+            size="small"
+            class="absolute bottom-4 right-4"
+            @click="navigateTo(`/products/${relatedProduct.id}`)"
+          >
+            View Product
+          </el-button>
+        </el-card>
+      </div>
+    </div>
   </div>
 
   <div v-else class="loading-container flex justify-center items-center w-full">
@@ -82,12 +118,12 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';  // Import `useRoute` from vue-router
+import { useRoute } from 'vue-router';
 import { useProductStore } from '~/store/product.js';
 import { useCartStore } from '~/store/cart.js';
 
-const route = useRoute();  // Use the `useRoute` hook to get access to route params
-const productId = route.params.id;  // Assuming `id` is the route parameter
+const route = useRoute();
+const productId = route.params.id;
 const product = ref(null);
 const productStore = useProductStore();
 const cartStore = useCartStore();
@@ -138,10 +174,9 @@ const addToCart = async () => {
 // Fetch the product data when the component is mounted
 onMounted(() => {
   if (!productId) {
-    navigateTo('/products'); // Fallback if no productId is found
-  } else {
-    fetchProduct(productId);
+    navigateTo('/products');
   }
+  fetchProduct(productId);
 });
 </script>
 
@@ -160,5 +195,8 @@ onMounted(() => {
   50% {
     opacity: 0.4;
   }
+}
+.related-products .el-card {
+  cursor: pointer;
 }
 </style>
