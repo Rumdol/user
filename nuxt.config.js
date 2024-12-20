@@ -17,9 +17,14 @@ export default defineNuxtConfig({
     ["@nuxtjs/sitemap"],
     "@element-plus/nuxt",
     "@nuxt/icon",
+    'nuxt-paypal',
   ],
-
-  css: ["~/assets/css/index.css"],
+  paypal: {
+    clientId: process.env.PAYPAL_CLIENT_ID,
+  },
+  css: [
+    "~/assets/scss/index.scss"
+  ],
   elementPlus: { /** Options */ },
   runtimeConfig: {
     public: {
