@@ -3,7 +3,7 @@
     <div class="Register-body">
       <div class="other-information">
         <img src="/images/rumdulLogo.png" alt="Rumdul Logo" />
-        <h1>Welcome to Rumdul sign in</h1>
+        <h1>Welcome to Rumdul sign Up</h1>
       </div>
       <div class="Register-form">
         <h1 class="text-2xl font-bold mb-6 text-center">Sign Up here!</h1>
@@ -51,16 +51,18 @@
           </el-form-item>
         </el-form>
         <div class="text-center my-4 text-gray-500">or register with</div>
-        <button
-          class="w-full flex justify-center items-center gap-2"
-          @click="handleGoogleSignUp"
-        >
-          <img
-            src="/images/google.jpg"
-            class="google-icon-image"
-            alt="google image icon"
-          />
-        </button>
+        <div class="google-register">
+          <button
+            class="button-google flex justify-center items-center gap-2"
+            @click="handleGoogleSignUp"
+          >
+            <img
+              src="/images/google.jpg"
+              class="google-icon-image"
+              alt="google image icon"
+            />
+          </button>
+        </div>
         <p class="text-center text-sm mt-4">
           Already have an account?
           <a
@@ -130,21 +132,21 @@ const rules = {
 
 const registerFormRef = ref(null)
 
-const handleRegister = async() => {
+const handleRegister = async () => {
   registerFormRef.value.validate(async (valid) => {
     if (valid) {
       await authStore.register({
         name: registerForm.fullName,
         email: registerForm.email,
-        password: registerForm.password,  
+        password: registerForm.password,
       })
       navigateTo('/')
-      ElMessage.success('Registration successful');
+      ElMessage.success('Registration successful')
     } else {
-      ElMessage.error('Please fill in the form correctly');
+      ElMessage.error('Please fill in the form correctly')
     }
-  });
-};
+  })
+}
 
 const handleGoogleSignUp = () => {
   ElMessage.info('Redirecting to Google Sign-Up...')
@@ -213,6 +215,13 @@ const handleGoogleSignUp = () => {
 .register-button:hover {
   color: #fff;
   background: #2ec4b6;
-
+}
+.google-register {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.button-google {
+  width: 30px;
 }
 </style>

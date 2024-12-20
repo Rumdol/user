@@ -1,4 +1,5 @@
 <template>
+  <Categories />
   <div class="max-w-sm mx-auto p-4 bg-gray-50 rounded-lg shadow-lg">
     <div v-if="category">
       <div class="text-center mb-6">
@@ -29,7 +30,9 @@
 <script setup>
 definePageMeta({
   layout: 'homepage',
-});
+})
+useSeoMeta({ title: `Category` })
+
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import categories from 'assets/categories.json';

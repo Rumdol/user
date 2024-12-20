@@ -1,6 +1,6 @@
 <template>
-    <nav class="py-1">
-      <ul class="flex justify-center space-x-16">
+    <nav class="category-border py-1">
+      <ul class=" flex justify-center space-x-16 ">
         <li v-for="category in categories" :key="category.slug" class="text-black font-semibold hover:text-gray-400">
           <NuxtLink
             :to="`/category/detail/${category.slug}`"
@@ -38,6 +38,9 @@
     color: #fff;
     border-radius: 0.25rem;
     transition: 0.2s ease ;
+  }
+  .category-border{
+    background: #f59ae0;
   }
   </style>
   

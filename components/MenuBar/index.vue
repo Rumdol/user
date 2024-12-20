@@ -8,6 +8,12 @@
         </NuxtLink>
       </li>
       <li>
+        <NuxtLink to="/promotion"
+          class="menu-hover">
+          Promotion
+        </NuxtLink>
+      </li>
+      <li>
         <NuxtLink to="/Products"
           class="menu-hover">
           Men
@@ -26,6 +32,12 @@
         </NuxtLink>
       </li>
       <li>
+        <NuxtLink to="/category"
+          class="menu-hover">
+          Category
+        </NuxtLink>
+      </li>
+      <li>
         <NuxtLink to="/about-us"
           class="menu-hover">
           About Us
@@ -37,13 +49,6 @@
           Contact Us
         </NuxtLink>
       </li>
-      <!-- <li v-for="category in categories" :key="category.slug" class="text-black font-semibold hover:text-gray-400">
-        <NuxtLink
-          :to="`/category/detail/${category.slug}`"
-          class="menu-hover">
-          {{ category.name }}
-        </NuxtLink>
-      </li> -->
     </ul>
   </nav>
 </template>
