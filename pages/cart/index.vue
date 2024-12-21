@@ -124,7 +124,7 @@
 import { ref } from 'vue'
 
 useSeoMeta({ title: 'Rumdul | Cart' });
-definePageMeta({ layout: 'default' })
+definePageMeta({ layout: 'default' ,middleware: ['authenticate']})
 import {useCartStore} from '~/store/cart.js'
 
 const cartStore = useCartStore();
