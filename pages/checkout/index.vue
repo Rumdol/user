@@ -95,7 +95,7 @@ import { ElMessage } from 'element-plus';
 useSeoMeta({ title: 'Rumdul | Cart' });
 
 const cartStore = useCartStore();
-const { getCart, buyCart } = cartStore;
+const { getCart,  buyCart } = cartStore;
 
 const carts = ref([]);
 const isProcessing = ref(false);
@@ -171,8 +171,10 @@ const buy = async (details) => {
     ElMessage.error('Failed to complete purchase');
   }
 };
+
 const handleClosePopup = () => {
   showPaymentPopup.value = false; // Close the popup
+  navigateTo('/order')
 };
 onMounted(() => {
   fetchCart();

@@ -149,8 +149,9 @@ const handleRegister = async () => {
 }
 
 const handleGoogleSignUp = () => {
-  ElMessage.info('Redirecting to Google Sign-Up...')
-  // Add your Google OAuth registration logic here
+  ElMessage.info('Redirecting to Google login...');
+  // Redirect to the Google login endpoint
+  window.location.href = 'https://api.decapsoul.one/auth/google';
 }
 </script>
 

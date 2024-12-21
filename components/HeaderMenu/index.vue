@@ -53,7 +53,7 @@
               </li>
               <li>
                 <NuxtLink to="/order">
-                  <span class="ml-2">Or</span>
+                  <i class="fa-solid fa-file-lines"></i>&nbsp;Order
                 </NuxtLink>
               </li>
               <!-- Join Business -->
