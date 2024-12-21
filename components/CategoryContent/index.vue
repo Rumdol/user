@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold">Category</h2>
       <el-button
-        @click="navigateTo('/Category')"
+        @click="navigateTo('category')"
         class="text-lg cursor-pointer"
       >
         See More
@@ -57,11 +57,6 @@ const fetchCategory = async (params) => {
 onMounted(() => {
   fetchCategory({ per_page: 5 })
 })
-
-// Navigate to another route
-const navigateTo = (route) => {
-  window.location.href = route
-}
 </script>
 
 <style scoped>
