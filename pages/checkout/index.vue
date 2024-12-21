@@ -93,7 +93,7 @@ import { useCartStore } from '~/store/cart.js';
 import { ElMessage } from 'element-plus';
 
 useSeoMeta({ title: 'Rumdul | Cart' });
-
+definePageMeta({ layout: 'default' ,middleware: ['authenticate']})
 const cartStore = useCartStore();
 const { getCart,  buyCart } = cartStore;
 
