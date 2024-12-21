@@ -25,3 +25,4 @@ logs
 .vscode
 
 .bash_history
+package-lock.json

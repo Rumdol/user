@@ -127,6 +127,7 @@ const handleLogin = async () => {
 
 const handleGoogleLogin = () => {
   ElMessage.info('Redirecting to Google login...')
+  window.location.href = 'https://api.rumdul.store/auth/google';
 }
 </script>
 <style scoped>
