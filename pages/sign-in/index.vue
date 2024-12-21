@@ -126,10 +126,8 @@ const handleLogin = async () => {
 }
 
 const handleGoogleLogin = () => {
-  ElMessage.info('Redirecting to Google login...');
-  // Redirect to the Google login endpoint
-  window.location.href = 'https://api.decapsoul.one/auth/google';
-
+  ElMessage.info('Redirecting to Google login...')
+  window.location.href = 'https://api.rumdul.store/auth/google';
 }
 </script>
 <style scoped>

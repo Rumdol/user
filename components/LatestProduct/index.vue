@@ -20,9 +20,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto py-8">
+  <div class="latest-content container mx-auto py-8">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-semibold text-color">Latest Product</h2>
+      <h2 class="text-3xl font-bold">Latest Product</h2>
       <el-button
         @click="navigateTo('/Category')"
         class="text-lg cursor-pointer"
@@ -51,3 +51,9 @@ onMounted(() => {
     </div>
   </div>
 </template>
+<style scoped>
+.latest-content{
+  width: 90%;
+  margin: 0 auto;
+}
+</style>
