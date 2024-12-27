@@ -7,7 +7,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useGoogleAuthStore } from '~/store/google.js'
-definePageMeta({ layout: 'default' ,middleware: ['authenticate']})
+definePageMeta({ layout: 'default'})
 const googleAuth = useGoogleAuthStore()
 const route = useRoute();
 
