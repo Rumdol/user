@@ -15,7 +15,10 @@ const code = route.query.code;
 
 if (code) {
   try {
-    await googleAuth.handleGoogleCallback(code);
+    const google = await googleAuth.handleGoogleCallback({
+      code: code,
+    });
+    console.log('Google login successful:', google);
   } catch (error) {
     console.error('Google login failed:', error);
   }
