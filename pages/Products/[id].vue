@@ -140,7 +140,10 @@ const fetchProduct = async (productId) => {
 const amount = ref(1);
 
 const increaseAmount = () => {
-  amount.value++;
+  if(amount.value < 10)
+  {
+    amount.value++;
+  }
 };
 
 const decreaseAmount = () => {

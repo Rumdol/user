@@ -18,7 +18,7 @@
       <div class="p-2 flex flex-col justify-between h-[200px]">
         <div class="flex flex-col gap-1">
           <h2 class="font-semibold text-lg text-gray-800 line-clamp-2 h-[60px]">{{ product.title }}</h2>
-          <p class="text-sm text-gray-500">Size: {{ product.size }} ml</p>
+          <p class="text-sm text-gray-500">Size: {{ product.volume }} ml</p>
           <p class="text-lg text-green-600 font-bold">&dollar;{{ product.price }}</p>
         </div>
         <button

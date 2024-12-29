@@ -128,7 +128,7 @@ onMounted(() => {
             <div class="flex flex-col gap-2 mb-4">
               <label for="product-size">Size</label>
               <el-select
-                v-model="filterOption.size"
+                v-model="filterOption.volume"
                 placeholder="Select Size"
                 class="mb-4"
                 @change="filterProducts"
