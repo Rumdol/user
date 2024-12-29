@@ -44,7 +44,7 @@
         </li>
       </ul>
       <div>Total : {{ carts?.summary?.total }}</div>
-      <el-button v-if="!isProcessing" type="primary" @click="showPaypal" class="w-full bg-blue-500 text-white py-2 mt-4 rounded hover:bg-blue-600">Checkout</el-button>
+      <el-button v-if="!isProcessing" type="primary" @click="showPaypal" class="w-full bg-blue-500 text-white py-2 mt-4 rounded hover:bg-blue-600">Order</el-button>
       <div class="flex w-20">
         <div v-if="isProcessing" id="paypal-checkout"></div>
       </div>
@@ -80,10 +80,6 @@
       </el-dialog>
 
     </div>
-
-
-
-
   </div>
 </template>
 
@@ -93,7 +89,8 @@ import { useCartStore } from '~/store/cart.js';
 import { ElMessage } from 'element-plus';
 
 useSeoMeta({ title: 'Rumdul | Cart' });
-definePageMeta({ layout: 'default' ,middleware: ['authenticate']})
+definePageMeta({ layout: 'default' ,middleware: ['authenticate']})//protect from unauthorized
+
 const cartStore = useCartStore();
 const { getCart,  buyCart } = cartStore;
 

@@ -2,6 +2,7 @@
   <h1 class="text-2xl font-bold mb-4">Your Shopping Cart</h1>
   <div class="flex flex-row justify-between gap-8 p-4">
     <div class="flex flex-col w-[1000px]">
+
       <!-- Shopping Cart Section -->
       <div class="mb-4 border border-gray-200 h-[100px] p-4 rounded flex items-center justify-between">
         <span class="font-bold">Delivery Address:</span>
