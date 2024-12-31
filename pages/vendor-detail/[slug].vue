@@ -2,22 +2,32 @@
 import { ref, onMounted } from 'vue'
 import { useVendorStore } from '~/store/vendor.js'
 import { ElMessage } from 'element-plus'
+import { useDebounce } from '~/composables/useDebounce.js'
 
 const vendorDetail = ref([])
+const searchTerm = ref('');
 const vendorStore = useVendorStore()
 const { showVendor } = vendorStore
 
 const route = useRoute();
-
+const { debounce } = useDebounce();
 // Fetch vendors
 const showVendorDetail = async () => {
   try {
     const slug = route.params.slug
-    vendorDetail.value = await showVendor(slug)
+    vendorDetail.value = await showVendor({
+        slug: slug,
+        search: searchTerm.value,
+    }
+    )
   } catch (error) {
     ElMessage.error('Failed to fetch vendor detail')
   }
 }
+// Handle search input
+const handleSearch = debounce(() => {
+  showVendorDetail();
+}, 500);
 
 
 onMounted(() => {
@@ -44,6 +54,16 @@ onMounted(() => {
       <div class="flex flex-col lg:flex-row gap-6">
         <!-- Product list -->
         <section class="w-full lg:w-3/4">
+          <h1 class="text-2xl font-bold mb-6">Product List</h1>
+          <div class="flex items-center mb-4">
+            <input
+              v-model="searchTerm"
+              @input="handleSearch"
+              type="text"
+              placeholder="Search products..."
+              class="border rounded-md p-2 mr-4"
+            />
+          </div>
           <VendorProductList
             :products="vendorDetail.products"
           />
