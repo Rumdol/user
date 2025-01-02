@@ -1,30 +1,31 @@
 <template>
   <div class="max-w-4xl mx-auto p-6">
     <h1 class="text-3xl font-bold text-gray-800 mb-6">Categories</h1>
-    <ul class="space-y-4">
-      <li
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
         v-for="category in categories"
         :key="category.id"
-        class="flex items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-50"
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
       >
-        <img
-          :src="category.icon"
-          alt="Category Icon"
-          class="w-12 h-12 mr-4 rounded-full object-cover"
-        />
-        <div>
-          <NuxtLink
-            :to="`/category/detail/${category.slug}`"
-            class="text-hover text-xl font-semibold"
-          >
-            {{ category.name }}
-          </NuxtLink>
-          <p v-if="category.description" class="text-gray-600 mt-1">
-            {{ category.description }}
-          </p>
+        <div @click="navigateTo('/category/detail/' + category.slug)" class="cursor-pointer">
+          <img
+            :src="category.icon"
+            alt="Category Icon"
+            class="w-full h-40 object-cover"
+          />
+          <div class="p-4">
+            <div
+              class="text-hover text-xl font-semibold block mb-2"
+            >
+              {{ category.name }}
+            </div>
+            <p v-if="category.description" class="text-gray-600 text-sm">
+              {{ category.description }}
+            </p>
+          </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -41,13 +42,7 @@ const categories = ref([]);
 const fetchCategories = async () => {
   const response = await getCategories();
   if (response) {
-    categories.value = response.data.map(category => ({
-      id: category.id,
-      name: category.name,
-      slug: category.slug,
-      icon: category.icon || 'https://via.placeholder.com/48', // Placeholder for missing icons
-      description: category.description,
-    }));
+    categories.value = response;
   }
 };
 
@@ -59,6 +54,7 @@ onMounted(() => {
 <style scoped>
 .text-hover {
   color: #000;
+  text-decoration: none;
 }
 .text-hover:hover {
   color: #2ec4b6;
