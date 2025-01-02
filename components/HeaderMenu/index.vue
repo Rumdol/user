@@ -34,7 +34,7 @@
                 </el-icon>
               </li>
               <!-- Wishlist -->
-              <li>
+              <li v-if="isLogin">
                 <NuxtLink to="/wishlist">
                   <el-badge is-dot class="item-dot">
                     <Icon name="uil:heart" class="header-icon" />
@@ -43,7 +43,7 @@
                 </NuxtLink>
               </li>
               <!-- Cart -->
-              <li>
+              <li v-if="isLogin">
                 <NuxtLink to="/cart">
                   <el-badge :value="0" class="item" color="red">
                     <Icon name="uil:cart" class="header-icon" />
@@ -52,7 +52,7 @@
                 </NuxtLink>
               </li>
               <!-- Order -->
-              <li>
+              <li v-if="isLogin">
                 <NuxtLink to="/order">
                   <Icon name="uil:store" class="header-icon" />
                   <span class="ml-2">Order</span>

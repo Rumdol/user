@@ -17,6 +17,7 @@
         v-for="category in categories"
         :key="category.id"
         class="promo-item border rounded-lg overflow-hidden shadow hover:shadow-lg transition-all"
+        @click="navigateTo(`/category/detail/${category.slug}`)"
       >
         <!-- Image -->
         <img

@@ -44,10 +44,24 @@ export const useProductStore = defineStore('product', () => {
     }
   }
 
+  //getDiscountedProduct
+  const getDiscountedProduct = async (params) => {
+    try {
+      const { data } = await productService.getDiscountedProduct(params)
+      const products = data || {}
+      product.value = products
+      return products
+    } catch (error) {
+      ElMessage.error(error.message || 'Get discounted product failed')
+      throw new Error(`Get discounted product failed: ${error.message || 'Unknown error'}`)
+    }
+  }
+
   return {
     product: computed(() => product.value),
     getProduct,
     showProduct,
-    getLatestProduct
+    getLatestProduct,
+    getDiscountedProduct
   }
 })

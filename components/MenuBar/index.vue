@@ -16,18 +16,6 @@
       <li>
         <NuxtLink to="/Products"
           class="menu-hover">
-          Men
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/Products"
-          class="menu-hover">
-          Women
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/Products"
-          class="menu-hover">
           Products
         </NuxtLink>
       </li>
@@ -38,7 +26,7 @@
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/store"
+        <NuxtLink to="/vendor-list"
           class="menu-hover">
           Store
         </NuxtLink>
