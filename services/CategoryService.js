@@ -27,6 +27,11 @@ class CategoryService extends BaseService {
     return await this._get(`${this._prefix}?${queryString}`, {});
   }
 
+  //showCategory
+  async showCategory(slug, params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return await this._get(`${this._prefix}/${slug}?${queryString}`, {});
+  }
 
 }
 
