@@ -19,9 +19,19 @@ class VendorService extends BaseService {
     return await this._get(`${this._prefix}?${queryParams}`, {})
   }
 
-  async showVendor(slug) {
-    return await this._get(`${this._prefix}/${slug}`);
+
+  async showVendor(payload = {}) {
+    const { slug, search } = payload;  // Destructure the parameters
+    const queryParams = new URLSearchParams(payload);
+
+    if (search) {
+      queryParams.append('search', search);  // Append the search term if it exists
+    }
+
+    const queryString = queryParams.toString();
+    return await this._get(`${this._prefix}/${slug}?${queryString}`);
   }
+
 
 }
 

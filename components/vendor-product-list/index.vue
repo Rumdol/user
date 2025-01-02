@@ -9,16 +9,6 @@ const props = defineProps({
 
 <template>
   <div class="products-container px-4 md:px-8 lg:px-12">
-    <h1 class="text-2xl font-bold mb-6">Product List</h1>
-    <div class="flex items-center mb-4">
-      <input
-        v-model="searchQuery"
-        @input="searchProducts"
-        type="text"
-        placeholder="Search products..."
-        class="border rounded-md p-2 mr-4"
-      />
-    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto max-w-7xl p-6 w-[1500px]">
       <div
@@ -28,7 +18,7 @@ const props = defineProps({
       >
         <!-- Product Image -->
         <div class="relative h-72">
-          <img :src="product.image" :alt="product.title" class="w-full h-full object-cover" />
+          <img :src="product.image" :alt="product.image" class="w-full h-full object-cover" />
         </div>
 
         <!-- Product Details -->

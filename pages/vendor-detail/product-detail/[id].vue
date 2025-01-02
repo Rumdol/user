@@ -3,9 +3,9 @@
     <el-card shadow="hover" class="max-w-5xl mx-auto mt-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Image Section -->
-        <div class="product-image-section flex justify-center items-center">
+        <div class="product-image-section flex justify-center items-center" v-if="productDetail">
           <el-image
-
+            :src="productDetail.image || 'path/to/fallback-image.jpg'"
             fit="cover"
             class="w-full h-96 rounded-lg shadow-md"
           ></el-image>
@@ -13,19 +13,20 @@
 
         <!-- Details Section -->
         <div class="product-info space-y-6">
-          <h1 class="text-3xl font-bold text-gray-800">{{}}</h1>
-          <p class="text-gray-600 text-lg">{{}}</p>
+          <h1 class="text-3xl font-bold text-gray-800">{{productDetail.title}}</h1>
+          <p class="text-gray-600 text-lg">{{productDetail.slug}}</p>
 
           <div class="text-gray-700">
-            <p><strong>Category:</strong> {{  }}</p>
-            <p><strong>Gender:</strong> {{ }}</p>
-            <p><strong>Volume:</strong> {{  }} ml</p>
-            <p><strong>Product Code:</strong> {{  }}</p>
+            <p><strong>Category: </strong> {{productDetail.category?.name}}</p>
+            <p><strong>Gender: </strong> {{ productDetail.gender }}</p>
+            <p><strong>Volume: </strong> {{ productDetail.volume }} ml</p>
+            <p><strong>Product Code: </strong> {{productDetail.product_code}}</p>
           </div>
 
           <div>
-            <p class="text-green-600 text-2xl font-bold">Price: &dollar;{{  }}</p>
-            <p  class="text-red-500">Discount: {{  }}%</p>
+            <p class="text-green-600 text-2xl font-bold">Price: &dollar;{{ productDetail.price }}</p>
+            <p  class="text-red-500">Discount: {{ productDetail.discount }}%</p>
+            <p  class="">Tags: {{ productDetail.tags }}</p>
           </div>
 
           <div class="flex items-center gap-4">
@@ -38,15 +39,11 @@
               >
                 -
               </button>
-              <input
-                type="number"
-                class="w-12 text-center border-0 outline-none"
-                v-model.number="amount"
-                min="1"
-              />
+              <p class="border border-gray:10 p-2">{{amount}}</p>
               <button
                 class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600"
                 @click="increaseAmount"
+                :disabled="amount >= maxAmount"
               >
                 +
               </button>
@@ -57,93 +54,74 @@
               type="primary"
               class="buy-now-btn"
               size="large"
-              @click="addToCart(productId)"
-            >
-              Add to Cart
+              @click="addToCart"
+            >Add to Cart
             </el-button>
           </div>
-
         </div>
       </div>
-    </el-card>
+      </el-card>
   </div>
 </template>
 
 <script setup>
-/*
 import { ref, onMounted } from 'vue'
-import { useVendorStore } from '~/store/vendor.js'
+import { useProductStore} from '~/store/product.js'
 import { ElMessage } from 'element-plus'
 
-const vendorDetail = ref([])
-const vendorStore = useVendorStore()
-const { showVendor } = vendorStore
 
 const route = useRoute();
 
+const productStore = useProductStore();
+const { showProduct } = productStore;
+const productDetail = ref('');
+const id = route.params.id
+
 // Fetch vendors
-const showVendorDetail = async () => {
+const fetchProduct = async (id) => {
   try {
-    const slug = route.params.slug
-    vendorDetail.value = await showVendor(slug)
+    productDetail.value = await showProduct(id)
   } catch (error) {
     ElMessage.error('Failed to fetch vendor detail')
   }
 }
 
+const amount = ref(1) // Initial quantity
+const maxAmount = ref(10) // Set the maximum quantity
 
-onMounted(() => {
-  showVendorDetail()
-})
-
-/*
-// Add to cart logic
-const amount = ref(1);
-
-const increaseAmount = () => {
-  if(amount.value < 10)
-  {
-    amount.value++;
-  }
-};
-
+// Decrease the quantity
 const decreaseAmount = () => {
   if (amount.value > 1) {
-    amount.value--;
+    amount.value -= 1
   }
-};
+}
 
-const addToCart = async () => {
-  try {
-    const params = {
-      product: productId, // Pass the product ID from the route
-      count: amount.value, // Pass the quantity
-    };
-    console.log('Adding to cart with params:', params);
-
-    // Call the cartStore's addCart method (action)
-    const response = await cartStore.addCart(params);
-
-    // Log the updated cart state or API response
-    console.log('Cart updated:', response);
-    ElMessage.success('Product added to cart successfully');
-    return response;
-
-  } catch (error) {
-    console.error('Failed to add product to cart:', error.message);
-    ElMessage.error(`Failed to add product to cart: ${error.message}`);
+// Increase the quantity
+const increaseAmount = () => {
+  if (amount.value < maxAmount.value) {
+    amount.value += 1
   }
-};
+}
 
-// Fetch the product data when the component is mounted
+const validateAmount = () => {
+  if (amount.value < 1) {
+    amount.value = 1
+  } else if (amount.value > maxAmount.value) {
+    amount.value = maxAmount.value
+  }
+}
+
+// Add to Cart
+const addToCart = ( id, amount ) => {
+   navigateTo('/cart');
+}
+
 onMounted(() => {
-  if (!productId) {
-    navigateTo('/products');
-  }
-  fetchProduct(productId);
-});
+  fetchProduct(id)
+})
 
- */
+
+
 </script>
 
 <style scoped>
