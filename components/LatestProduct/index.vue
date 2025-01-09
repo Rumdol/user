@@ -30,31 +30,7 @@ onMounted(() => {
         See More
       </el-button>
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-      <div
-        v-for="product in products"
-        :key="product.id"
-        class="promo-item border rounded-lg overflow-hidden shadow hover:shadow-lg transition-all bg-white"
-      >
-        <img
-          :src="product.image"
-          :alt="product.title"
-          class="product-image w-full h-48 object-cover cursor-pointer"
-        />
-        <div class="p-4">
-          <h3 class="item-title text-lg font-semibold mb-2">
-            {{ product.title }}
-          </h3>
-        </div>
-        <button
-          @click="navigateTo('/products/' + product.id)"
-          class="w-full bg-cyan-500 text-white text-center py-2 rounded-lg hover:bg-cyan-600 active:bg-cyan-700 transition-colors duration-200 mt-2"
-        >
-          View Detail
-        </button>
-      </div>
-    </div>
+    <ProductCard :products="products" />
   </div>
 </template>
 

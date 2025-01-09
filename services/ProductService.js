@@ -45,7 +45,7 @@ class ProductService extends BaseService {
     //per_page
     const params = {
       page: payload.page || 1,
-      per_page: payload.per_page || 5,
+      per_page: payload.per_page || 4,
     };
 
     // Convert the params object into a query string
