@@ -122,6 +122,8 @@ import { useRoute } from 'vue-router';
 import { useProductStore } from '~/store/product.js';
 import { useCartStore } from '~/store/cart.js';
 
+definePageMeta({ layout: 'homepage' })
+
 const route = useRoute();
 const productId = route.params.id;
 const product = ref(null);

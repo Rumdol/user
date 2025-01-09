@@ -4,6 +4,8 @@ import { useVendorStore } from '~/store/vendor.js';
 import { ElMessage } from 'element-plus';
 import { useDebounce } from '~/composables/useDebounce.js';
 
+definePageMeta({ layout: 'homepage' })
+
 const currentPage = ref(1);
 const totalPages = ref(1);
 const vendors = ref([]);
@@ -14,7 +16,6 @@ const { getVendor } = vendorStore;
 
 // For search debounce
 const { debounce } = useDebounce();
-
 // Fetch vendors
 const fetchVendor = async () => {
   try {

@@ -4,6 +4,8 @@ import { useVendorStore } from '~/store/vendor.js'
 import { ElMessage } from 'element-plus'
 import { useDebounce } from '~/composables/useDebounce.js'
 
+definePageMeta({ layout: 'homepage' })
+
 const vendorDetail = ref([])
 const searchTerm = ref('');
 const vendorStore = useVendorStore()
@@ -50,23 +52,52 @@ onMounted(() => {
   </div>
 
   <div>
+    <!-- Search Bar -->
+    <div class="search-bar p-4">
+      <input
+        type="text"
+        v-model="searchTerm"
+        @input="handleSearch"
+        placeholder="Search products..."
+        class="w-[300px] border border-gray-300 rounded p-2"
+      />
+    </div>
     <div class="products-container px-4 md:px-8 lg:px-12">
       <div class="flex flex-col lg:flex-row gap-6">
+
         <!-- Product list -->
-        <section class="w-full lg:w-3/4">
-          <h1 class="text-2xl font-bold mb-6">Product List</h1>
-          <div class="flex items-center mb-4">
-            <input
-              v-model="searchTerm"
-              @input="handleSearch"
-              type="text"
-              placeholder="Search products..."
-              class="border rounded-md p-2 mr-4"
-            />
+        <section v-if="vendorDetail.products" class="w-full lg:w-2/2">
+          <ProductCard :products="vendorDetail.products" />
+          <!-- Pagination -->
+          <div class="pagination flex justify-between items-center mt-6">
+            <el-button
+              @click="prevPage"
+              :disabled="currentPage === 1"
+              class="w-[100px] text-blue-400 border-blue-200"
+            >
+              Previous
+            </el-button>
+            <div class="page-numbers flex gap-2">
+              <el-button
+                v-for="page in Array.from(
+                { length: totalPages },
+                (_, i) => i + 1,
+              )"
+                :key="page"
+                :class="page === currentPage ? 'btn-action' : 'btn-inactive'"
+                @click="fetchProduct({ page })"
+              >
+                {{ page }}
+              </el-button>
+            </div>
+            <el-button
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+              class="w-[100px] text-blue-400 border-blue-200"
+            >
+              Next
+            </el-button>
           </div>
-          <VendorProductList
-            :products="vendorDetail.products"
-          />
         </section>
       </div>
     </div>
