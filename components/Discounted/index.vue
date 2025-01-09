@@ -24,7 +24,7 @@ onMounted(() => {
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold">Discounted Products</h2>
       <el-button
-        @click="navigateTo('/products')"
+        @click="navigateTo('/promotion?filter=discount')"
         class="text-lg cursor-pointer"
       >
         See More

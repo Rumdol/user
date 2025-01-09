@@ -5,7 +5,7 @@
     <div
       v-for="product in products"
       :key="product.id"
-      class="relative border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      class="py-[10px] relative border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
     >
       <!-- Wishlist Heart -->
       <div
@@ -41,6 +41,20 @@
       <!-- Details Section -->
       <div class="p-2 flex flex-col justify-between h-[200px]">
         <div class="flex flex-col gap-1">
+          <div v-if="product.product_type">
+            <span
+              :class="{
+                'text-xs px-2 py-1 rounded-full': true,
+                'bg-red-500 text-white': product.product_type === 'discount',
+                'bg-green-500 text-white': product.product_type === 'compound',
+                'bg-blue-500 text-white':
+                  product.product_type === 'compound_discount',
+              }"
+            >
+              {{ formattedProductType(product.product_type) }}
+            </span>
+          </div>
+
           <h2 class="font-semibold text-lg text-gray-800 line-clamp-2 h-[60px]">
             {{ product.title }}
           </h2>
@@ -73,7 +87,6 @@ defineProps({
 })
 const { cookies } = useCookies()
 const wishlistStore = useWishlistStore()
-// Initialize wishlist as an array since the API returns an array
 const wishlist = ref([])
 
 // Toggle wishlist status
@@ -112,6 +125,13 @@ const isInWishlist = (productId) => {
   return ids.includes(productId)
 }
 
+const formattedProductType = (product_type) => {
+  if (!product_type) return ''
+  return product_type
+    .replace(/_/g, ' ') // Replace underscores with spaces
+    .toLowerCase() // Ensure it's in lowercase
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
+}
 // On component mounted, fetch the wishlist
 onMounted(() => {
   const token = cookies.get('access_token')
