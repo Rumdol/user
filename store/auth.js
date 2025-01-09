@@ -81,6 +81,36 @@ export const useAuthStore = defineStore('auth', () => {
     cookies.remove('access_token')
     cookies.remove('user')
     cookies.remove('tokenType')
+    //logout
+    authService.logout()
+  }
+
+  //getProfile
+  const getProfile = async () => {
+    try {
+      const { data } = await authService.getProfile()
+      if (!data) {
+        throw new Error('No data returned')
+      }
+      return data
+    } catch (error) {
+      ElMessage.error(error.message || 'Profile failed')
+      throw new Error(`Profile failed: ${error.message || 'Unknown error'}`)
+    }
+  }
+
+  //updateProfile
+  const editProfile = async (credentials) => {
+    try {
+      console.log(credentials)
+      const { data } = await authService.updateProfile(credentials)
+      if (!data) {
+        throw new Error('No data returned')
+      }
+      return data
+    } catch (error) {
+      throw error
+    }
   }
 
   return {
@@ -90,5 +120,7 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     getMe,
+    getProfile,
+    editProfile,
   }
 })
