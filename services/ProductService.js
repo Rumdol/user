@@ -70,6 +70,23 @@ class ProductService extends BaseService {
     return await this._get(`${this._prefix}/discounted?${queryString}`, {})
   }
 
+  //promotion products
+  async getPromotionProduct(payload = {}) {
+    //per_page
+    const params = {
+      page: payload.page || 1,
+      per_page: payload.per_page || 8,
+      search: payload.search || '',
+      filter: payload.filter || '',
+    };
+
+    // Convert the params object into a query string
+    const queryString = new URLSearchParams(params).toString();
+
+    // Make the API call with the query parameters
+    return await this._get(`${this._prefix}/promotion?${queryString}`, {})
+  }
+
 }
 
 export default ProductService
