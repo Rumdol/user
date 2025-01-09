@@ -53,7 +53,7 @@ onMounted(() => {
     <div class="products-container px-4 md:px-8 lg:px-12">
       <div class="flex flex-col lg:flex-row gap-6">
         <!-- Product list -->
-        <section class="w-full lg:w-3/4">
+        <section class="w-full">
           <h1 class="text-2xl font-bold mb-6">Product List</h1>
           <div class="flex items-center mb-4">
             <input
@@ -64,9 +64,7 @@ onMounted(() => {
               class="border rounded-md p-2 mr-4"
             />
           </div>
-          <VendorProductList
-            :products="vendorDetail.products"
-          />
+          <ProductCard :products="vendorDetail.products" />
         </section>
       </div>
     </div>
