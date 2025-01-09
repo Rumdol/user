@@ -168,7 +168,6 @@ onMounted(() => {
           </div>
           </div>
 
-
       </section>
 
       <!-- Product list -->
