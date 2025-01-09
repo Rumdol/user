@@ -5,7 +5,15 @@
       <!-- Shopping Cart Section -->
       <div class="mb-4 border border-gray-200 h-[100px] p-4 rounded flex items-center justify-between">
         <span class="font-bold">Delivery Address:</span>
-
+        <!-- Display the address if it exists, otherwise show the "Add Address" button -->
+        <div v-if="address.phone && address.city && address.state && address.country && address.postalId">
+          <p>{{ address.city }}, {{ address.state }}, {{ address.country }}</p>
+        </div>
+        <div v-else>
+          <el-button @click="showPopup = true" type="primary">
+            Add Address
+          </el-button>
+        </div>
       </div>
 
       <!-- Address Popup -->
@@ -53,9 +61,10 @@
         </el-form>
       </el-dialog>
 
-      <div class="border border-gray:10 p-4 rounded h-auto">
+
+      <div v-if="carts.data" class="border border-gray:10 p-4 rounded h-auto">
         <div class="space-y-4">
-          <div  class="pb-4 flex items-center justify-between">
+          <div v-for="item in carts.data " :key="item.id" class="pb-4 flex items-center justify-between">
             <div class="flex items-center">
               <img :src="item.image" alt="Product Image" class="w-16 h-16 object-cover rounded" />
               <div class="ml-4">
@@ -80,6 +89,10 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <p>No items in your cart.</p>
+      </div>
+    </div>
 
     <!-- Summary Section -->
     <div class=" w-1/3 bg-gray-100 p-6 rounded shadow" v-if="carts.summary">
