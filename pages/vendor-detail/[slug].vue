@@ -4,6 +4,8 @@ import { useVendorStore } from '~/store/vendor.js'
 import { ElMessage } from 'element-plus'
 import { useDebounce } from '~/composables/useDebounce.js'
 
+definePageMeta({ layout: 'homepage' })
+
 const vendorDetail = ref([])
 const searchTerm = ref('');
 const vendorStore = useVendorStore()

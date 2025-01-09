@@ -154,7 +154,7 @@ import { useProductStore } from '~/store/product.js'
 import { useCartStore } from '~/store/cart.js'
 import { useWishlistStore } from '~/store/wishlist.js'
 import { ElMessage } from 'element-plus' // Assuming you have a wishlist store
-
+definePageMeta({ layout: 'homepage' })
 const route = useRoute()
 const productId = route.params.id
 const product = ref(null)
