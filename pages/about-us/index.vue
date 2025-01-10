@@ -47,7 +47,7 @@
       <h2 class="text-center text-3xl font-bold text-indigo-700 mb-6">
         Meet the Project Members
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Member 1 -->
         <div class="text-center">
           <el-avatar
@@ -78,6 +78,17 @@
           ></el-avatar>
           <p class="text-lg text-gray-700 font-semibold mt-4">
             Seng Pitou
+          </p>
+          <p class="text-sm text-gray-500 italic">Team Member</p>
+        </div>
+
+        <div class="text-center">
+          <el-avatar
+            size="large"
+            src="https://ui-avatars.com/api/?name=Kim+Siveng&background=random"
+          ></el-avatar>
+          <p class="text-lg text-gray-700 font-semibold mt-4">
+            Kim Siveng
           </p>
           <p class="text-sm text-gray-500 italic">Team Member</p>
         </div>

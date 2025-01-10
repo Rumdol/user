@@ -51,14 +51,14 @@
           'bg-blue-500 text-white': product.product_type === 'compound_discount',
         }"
       >
-        {{ formattedProductType(product.product_type) }}
+        {{ $t('home.' + product.product_type) }}
       </span>
           </div>
 
           <h2 class="font-semibold text-lg text-gray-800 line-clamp-2 h-[60px]">
             {{ product.title }}
           </h2>
-          <p class="text-sm text-gray-500">Size: {{ product.volume }} ml</p>
+          <p class="text-sm text-gray-500">{{ $t('home.size') }} : {{ product.volume ?? 0 }} {{ $t('home.ml') }}</p>
 
           <!-- Price and Final Price -->
           <p class="text-gray-500" v-if="product.price > product.final_price">
@@ -74,7 +74,7 @@
           @click="navigateTo('/products/' + product.id)"
           class="w-full bg-cyan-500 text-white text-center py-2 rounded-lg hover:bg-cyan-600 active:bg-cyan-700 transition-colors duration-200 mt-2"
         >
-          View Detail
+          {{ $t('home.view_details') }}
         </button>
       </div>
     </div>

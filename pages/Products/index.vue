@@ -91,7 +91,7 @@ onMounted(() => {
 
 <template>
   <div class="products-container px-4 md:px-8 lg:px-12">
-    <h1 class="text-2xl font-bold mb-6 text-center">Products List</h1>
+    <h1 class="text-2xl font-bold mb-6 text-center">{{ $t('home.products_list') }}</h1>
     <div class="flex flex-col lg:flex-row gap-6">
       <!-- Filter section -->
       <section
@@ -99,7 +99,7 @@ onMounted(() => {
       >
         <div class="mb-6">
           <div class="flex justify-between">
-            <p class="font-bold mb-4">Filter by</p>
+            <p class="font-bold mb-4">{{ $t('home.filters') }}</p>
             <el-button type="primary" @click="collapse = !collapse">
               {{ collapse ? 'Show Filters' : 'Hide Filters' }}
             </el-button>
@@ -108,17 +108,17 @@ onMounted(() => {
           <div v-if="collapse" class="flex flex-col">
             <!-- Product Name Filter -->
             <div class="flex flex-col gap-2 mb-4">
-              <label for="product-name">Name</label>
+              <label for="product-name">{{ $t('home.name') }}</label>
               <el-input
                 v-model="filterOption.title"
-                placeholder="Enter Name"
+                :placeholder="$t('home.enter_name')"
                 class="mb-4"
                 @change="filterProducts"
               />
             </div>
 
             <div class="flex flex-col gap-2 mb-4">
-              <label for="product-price">Price</label>
+              <label for="product-price">{{ $t('home.price') }}</label>
               <el-slider
                 v-model="filterOption.priceRange"
                 range
@@ -131,16 +131,16 @@ onMounted(() => {
               />
 
               <div class="flex justify-between text-sm">
-                <span>Min: ${{ filterOption.priceRange[0] }}</span>
-                <span>Max: ${{ filterOption.priceRange[1] }}</span>
+                <span>{{ $t('home.min') }}: ${{ filterOption.priceRange[0] }}</span>
+                <span>{{ $t('home.max') }}: ${{ filterOption.priceRange[1] }}</span>
               </div>
             </div>
 
             <div class="mb-6">
-              <p class="font-bold mb-4">Sort by Price</p>
+              <p class="font-bold mb-4">{{ $t('home.sort_by_price') }}</p>
               <el-radio-group v-model="sortOrder" @change="sortProducts">
-                <el-radio value="ascending">Ascending</el-radio>
-                <el-radio value="descending">Descending</el-radio>
+                <el-radio value="ascending">{{ $t('home.ascending') }}</el-radio>
+                <el-radio value="descending">{{ $t('home.descending') }}</el-radio>
               </el-radio-group>
             </div>
           </div>
@@ -157,7 +157,7 @@ onMounted(() => {
             :disabled="currentPage === 1"
             class="w-[100px] text-blue-400 border-blue-200"
           >
-            Previous
+            {{ $t('home.previous') }}
           </el-button>
           <div class="page-numbers flex gap-2">
             <el-button
@@ -177,7 +177,7 @@ onMounted(() => {
             :disabled="currentPage === totalPages"
             class="w-[100px] text-blue-400 border-blue-200"
           >
-            Next
+            {{ $t('home.next') }}
           </el-button>
         </div>
       </section>

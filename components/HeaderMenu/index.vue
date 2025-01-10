@@ -41,7 +41,7 @@
                   <el-badge is-dot class="item-dot">
                     <Icon name="uil:heart" class="header-icon" />
                   </el-badge>
-                  <span class="ml-2">Wishlist</span>
+                  <span class="ml-2">{{ $t('home.wishlist') }}</span>
                 </NuxtLink>
               </li>
               <!-- Cart -->
@@ -50,20 +50,20 @@
                   <el-badge :value="0" class="item" color="red">
                     <Icon name="uil:cart" class="header-icon" />
                   </el-badge>
-                  <span class="ml-2">Cart</span>
+                  <span class="ml-2">{{ $t('home.cart') }}</span>
                 </NuxtLink>
               </li>
               <!-- Order -->
               <li v-if="isLogin">
                 <NuxtLink to="/order">
                   <Icon name="uil:store" class="header-icon" />
-                  <span class="ml-2">Order</span>
+                  <span class="ml-2">{{ $t('home.order') }}</span>
                 </NuxtLink>
               </li>
               <!-- Join Business -->
               <li>
                 <NuxtLink to="/join-business">
-                  <p class="business">Join Business</p>
+                  <p class="business">{{ $t('home.join_business') }}</p>
                 </NuxtLink>
               </li>
               <li>
@@ -77,8 +77,11 @@
               </li>
               <li v-else>
                 <NuxtLink to="/sign-in">
-                  <span class="ml-2">Sign In</span>
+                  <span class="ml-2">{{ $t('home.sign_in') }}</span>
                 </NuxtLink>
+              </li>
+              <li>
+                <Locale/>
               </li>
             </ul>
           </nav>
