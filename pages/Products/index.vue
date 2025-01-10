@@ -1,13 +1,16 @@
 <script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useDebounce } from '~/composables/useDebounce.js'
+import { useProductStore } from '~/store/product.js'
+import { useRoute } from 'vue-router'
+
 useSeoMeta({ title: 'Products' })
 definePageMeta({ layout: 'homepage' })
-import { ref, computed, onMounted } from 'vue'
-import { useProductStore } from '~/store/product.js'
 
+const route = useRoute() // Access the route
 const filterOption = ref({
-  name: '',
-  size: '',
-  priceRange: [0, 1000], // This will hold the min_price and max_price as an array
+  title: route.query.title || '', // Initialize with query param or empty string
+  priceRange: [0, 5000],
 })
 
 const sortOrder = ref('ascending')
@@ -16,55 +19,32 @@ const products = ref([])
 const productStore = useProductStore()
 const { getProduct } = productStore
 const collapse = ref(true)
-
+const { debounce } = useDebounce()
 const totalPages = ref()
 
 const fetchProduct = async (params) => {
   try {
     const productList = await getProduct(params)
-    products.value = productList.data // Adjusted to fetch the products from the data object
-    currentPage.value = productList.current_page // Current page from the API response
-    totalPages.value = productList.last_page // Last page from the API response
+    products.value = productList.data
+    currentPage.value = productList.current_page
+    totalPages.value = productList.last_page
   } catch (error) {
-    ElMessage.error('Failed to fetch product')
+    ElMessage.error('Failed to fetch products')
   }
 }
 
-const filterProducts = async () => {
-  const min_price = filterOption.value.priceRange[0]
-  const max_price = filterOption.value.priceRange[1]
+// Debounced fetch function
+const debouncedFetch = debounce(async () => {
   const params = {
-    min_price,
-    max_price,
+    title: filterOption.value.title,
+    min_price: filterOption.value.priceRange[0],
+    max_price: filterOption.value.priceRange[1],
   }
-  fetchProduct(params)
-  let filteredProducts = products.value
+  await fetchProduct(params)
+}, 300)
 
-  if (filterOption.value.name) {
-    filteredProducts = filteredProducts.filter((product) =>
-      product.name
-        .toLowerCase()
-        .includes(filterOption.value.name.toLowerCase()),
-    )
-  }
-
-  if (filterOption.value.size) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.size === filterOption.value.size,
-    )
-  }
-
-  if (
-    filterOption.value.min_price !== null &&
-    filterOption.value.max_price !== null
-  ) {
-    const { min_price, max_price } = filterOption.value.priceRange
-    filteredProducts = filteredProducts.filter(
-      (product) => product.price >= min_price && product.price <= max_price,
-    )
-  }
-
-  products.value = filteredProducts
+const filterProducts = () => {
+  debouncedFetch()
 }
 
 const sortProducts = () => {
@@ -91,14 +71,27 @@ const nextPage = () => {
   }
 }
 
+watch(
+  () => filterOption.value.title,
+  () => {
+    filterProducts()
+  },
+)
+
+// Fetch products when component mounts and use the `title` query if present
 onMounted(() => {
-  fetchProduct()
+  const params = {
+    title: filterOption.value.title,
+    min_price: filterOption.value.priceRange[0],
+    max_price: filterOption.value.priceRange[1],
+  }
+  fetchProduct(params)
 })
 </script>
 
 <template>
   <div class="products-container px-4 md:px-8 lg:px-12">
-    <h1 class="text-2xl font-bold mb-6">Product List</h1>
+    <h1 class="text-2xl font-bold mb-6 text-center">Products List</h1>
     <div class="flex flex-col lg:flex-row gap-6">
       <!-- Filter section -->
       <section
@@ -107,10 +100,9 @@ onMounted(() => {
         <div class="mb-6">
           <div class="flex justify-between">
             <p class="font-bold mb-4">Filter by</p>
-            <el-button
-              type="primary"
-              @click="collapse = !collapse"
-              ></el-button>
+            <el-button type="primary" @click="collapse = !collapse">
+              {{ collapse ? 'Show Filters' : 'Hide Filters' }}
+            </el-button>
           </div>
 
           <div v-if="collapse" class="flex flex-col">
@@ -118,25 +110,11 @@ onMounted(() => {
             <div class="flex flex-col gap-2 mb-4">
               <label for="product-name">Name</label>
               <el-input
-                v-model="filterOption.name"
+                v-model="filterOption.title"
                 placeholder="Enter Name"
                 class="mb-4"
                 @change="filterProducts"
               />
-            </div>
-
-            <div class="flex flex-col gap-2 mb-4">
-              <label for="product-size">Size</label>
-              <el-select
-                v-model="filterOption.volume"
-                placeholder="Select Size"
-                class="mb-4"
-                @change="filterProducts"
-              >
-                <el-option label="Small" value="small" />
-                <el-option label="Medium" value="medium" />
-                <el-option label="Large" value="large" />
-              </el-select>
             </div>
 
             <div class="flex flex-col gap-2 mb-4">
@@ -146,7 +124,7 @@ onMounted(() => {
                 range
                 class="mb-4"
                 :min="0"
-                :max="1000"
+                :max="5000"
                 :step="1"
                 show-tooltip
                 @change="filterProducts"
@@ -166,8 +144,7 @@ onMounted(() => {
               </el-radio-group>
             </div>
           </div>
-          </div>
-
+        </div>
       </section>
 
       <!-- Product list -->

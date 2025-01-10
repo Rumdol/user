@@ -39,27 +39,34 @@
       </div>
 
       <!-- Details Section -->
+      <!-- Details Section -->
       <div class="p-2 flex flex-col justify-between h-[200px]">
         <div class="flex flex-col gap-1">
           <div v-if="product.product_type">
-            <span
-              :class="{
-                'text-xs px-2 py-1 rounded-full': true,
-                'bg-red-500 text-white': product.product_type === 'discount',
-                'bg-green-500 text-white': product.product_type === 'compound',
-                'bg-blue-500 text-white':
-                  product.product_type === 'compound_discount',
-              }"
-            >
-              {{ formattedProductType(product.product_type) }}
-            </span>
+      <span
+        :class="{
+          'text-xs px-2 py-1 rounded-full': true,
+          'bg-red-500 text-white': product.product_type === 'discount',
+          'bg-green-500 text-white': product.product_type === 'compound',
+          'bg-blue-500 text-white': product.product_type === 'compound_discount',
+        }"
+      >
+        {{ formattedProductType(product.product_type) }}
+      </span>
           </div>
 
           <h2 class="font-semibold text-lg text-gray-800 line-clamp-2 h-[60px]">
             {{ product.title }}
           </h2>
           <p class="text-sm text-gray-500">Size: {{ product.volume }} ml</p>
-          <p class="text-lg text-green-600 font-bold">
+
+          <!-- Price and Final Price -->
+          <p class="text-gray-500" v-if="product.price > product.final_price">
+            <span class="line-through">&dollar;{{ product.price }}</span>
+            <span class="ml-2 text-lg text-green-600 font-bold">&dollar;{{ product.final_price }}</span>
+          </p>
+
+          <p class="text-lg text-green-600 font-bold" v-else>
             &dollar;{{ product.price }}
           </p>
         </div>

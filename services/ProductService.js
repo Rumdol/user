@@ -15,8 +15,9 @@ class ProductService extends BaseService {
 
   async getProduct(payload = {}) {
     const params = {
+      title: payload.title || '',
       min_price: payload.min_price || 0,
-      max_price: payload.max_price || 1000,
+      max_price: payload.max_price || 5000,
       categories_id: payload.categories_id || null,
       sort: payload.sort || null,
       page: payload.page || 1,

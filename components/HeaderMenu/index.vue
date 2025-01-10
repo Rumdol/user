@@ -23,8 +23,10 @@
                 <!-- Input field for the search bar -->
                 <input
                   type="text"
+                  v-model="searchQuery"
                   placeholder="Search for products..."
                   class="search-bar w-full px-4 py-2 rounded-full text-gray-700 outline-none focus:outline-none focus:ring-2 pl-10"
+                  @keyup.enter="search"
                 />
                 <!-- Element Plus search icon inside the input field -->
                 <el-icon
@@ -87,9 +89,24 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+import { useRouter } from "nuxt/app";
+
 defineProps({
   isLogin: Boolean,
-})
+});
+
+const searchQuery = ref("");
+const router = useRouter();
+
+const search = () => {
+  if (searchQuery.value.trim()) {
+    router.push({
+      path: "/products",
+      query: { title: searchQuery.value },
+    });
+  }
+};
 </script>
 
 <style scoped>
