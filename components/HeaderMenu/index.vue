@@ -70,7 +70,14 @@
               <!-- Sign In -->
               <li v-if="isLogin">
                 <NuxtLink to="/profile" class="profile">
-                  <Icon name="uil:user" class="header-icon" />
+                  <!-- <Icon name="uil:user" class="header-icon" /> -->
+                  <div v-if="user">
+                    <img
+                      :src="user.image"
+                      alt="Profile Image"
+                      class="w-10 h-10 rounded-full object-cover"
+                    />
+                  </div>
                 </NuxtLink>
               </li>
               <li v-else>
@@ -87,9 +94,24 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useAuthStore } from '~/store/auth.js';
+
 defineProps({
   isLogin: Boolean,
 })
+
+
+const authStore = useAuthStore();
+const user = ref(null);
+
+onMounted(async () => {
+  try {
+    user.value = await authStore.getProfile(); // Fetch user data or use cached data
+  } catch (error) {
+    console.error('Failed to fetch user data:', error);
+  }
+});
 </script>
 
 <style scoped>
@@ -146,9 +168,9 @@ li a:hover {
   color: #000;
 }
 
-.profile{
-  width: 35px;
-  height: 35px;
+.profile {
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
