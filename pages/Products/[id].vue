@@ -37,6 +37,7 @@
           </div>
 
           <div class="flex items-center gap-6">
+
             <!-- Quantity Selector -->
             <div
               class="flex items-center border border-gray-300 rounded overflow-hidden"
@@ -48,15 +49,11 @@
               >
                 -
               </button>
-              <input
-                type="number"
-                class="w-12 text-center border-0 outline-none"
-                v-model.number="amount"
-                min="1"
-              />
+              <span class="w-12 text-center">{{ amount }}</span>
               <button
                 class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600"
                 @click="increaseAmount"
+                :disabled="amount >= 10"
               >
                 +
               </button>
