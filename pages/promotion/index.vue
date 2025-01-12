@@ -2,12 +2,12 @@
   <div class="promotion-page p-4 flex">
     <!-- Sidebar for Filters -->
     <div class="sidebar w-72 p-4 bg-gray-100 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-4">Filters</h2>
+      <h2 class="text-xl font-semibold mb-4">{{ $t('home.filters') }}</h2>
 
       <!-- Search Input -->
       <el-input
         v-model="searchQuery"
-        placeholder="Search products"
+        :placeholder="$t('home.search_products')"
         size="small"
         clearable
         @input="debouncedApplyFilters"
@@ -16,11 +16,11 @@
 
       <!-- Filter Options -->
       <div class="space-y-2">
-        <h3 class="font-semibold text-sm">Product Type</h3>
+        <h3 class="font-semibold text-sm">{{ $t('home.product_type') }}</h3>
         <el-radio-group v-model="selectedType" @change="applyFilters">
-          <el-radio label="compound">Compound</el-radio>
-          <el-radio label="discount">Discount</el-radio>
-          <el-radio label="compound_discount">Compound & Discount</el-radio>
+          <el-radio label="compound">{{ $t('home.discount') }}</el-radio>
+          <el-radio label="discount">{{ $t('home.compound') }}</el-radio>
+          <el-radio label="compound_discount">{{ $t('home.compound_discount') }}</el-radio>
           <el-radio label="all">All</el-radio>
         </el-radio-group>
       </div>
@@ -30,7 +30,7 @@
 
     <!-- Main Content -->
     <div class="flex-1 ml-8">
-      <h1 class="text-2xl font-bold mb-4 text-center">Promotion Products</h1>
+      <h1 class="text-2xl font-bold mb-4 text-center">{{ $t('home.promotion_products') }}</h1>
 
       <el-row :gutter="20">
         <ProductCard :products="products" />
@@ -44,7 +44,7 @@
           :disabled="!prevPageUrl"
           @click="fetchProduct({ page: currentPage - 1 })"
         >
-          Previous
+          {{ $t('home.previous') }}
         </el-button>
 
         <!-- Page Number -->
@@ -56,7 +56,7 @@
           :disabled="!nextPageUrl"
           @click="fetchProduct({ page: currentPage + 1 })"
         >
-          Next
+          {{ $t('home.next') }}
         </el-button>
       </div>
     </div>

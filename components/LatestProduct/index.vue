@@ -22,12 +22,12 @@ onMounted(() => {
 <template>
   <div class="latest-content container mx-auto py-8">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-3xl font-bold">Latest Product</h2>
+      <h2 class="text-3xl font-bold">{{ $t('home.latest_product') }}</h2>
       <el-button
         @click="navigateTo('/products')"
         class="text-lg cursor-pointer"
       >
-        See More
+        {{ $t('home.see_more') }}
       </el-button>
     </div>
     <ProductCard :products="products" />

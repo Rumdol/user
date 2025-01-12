@@ -19,21 +19,20 @@
           <p class="text-gray-600 text-lg">{{ product.description }}</p>
 
           <div class="text-gray-700">
-            <p><strong>Brand:</strong> {{ product.brand_id }}</p>
-            <p><strong>Gender:</strong> {{ product.gender }}</p>
+            <p><strong>{{ $t('home.gender') }}:</strong> {{ product.gender }}</p>
             <p>
-              <strong>Fragrance Family:</strong> {{ product.fragrance_family }}
+              <strong>{{ $t('home.fragrance_family') }}:</strong> {{ product.fragrance_family }}
             </p>
-            <p><strong>Volume:</strong> {{ product.volume }} ml</p>
-            <p><strong>Product Code:</strong> {{ product.product_code }}</p>
+            <p><strong>{{ $t('home.volume') }}:</strong> {{ product.volume }} ml</p>
+            <p><strong>{{ $t('home.product_code') }}:</strong> {{ product.product_code }}</p>
           </div>
 
           <div>
             <p class="text-green-600 text-2xl font-bold">
-              Price: &dollar;{{ product.price }}
+              {{ $t('home.price') }}: &dollar;{{ product.price }}
             </p>
             <p v-if="product.discount > 0" class="text-red-500">
-              Discount: {{ product.discount }}%
+              {{ $t('home.discount') }}: {{ product.discount }}%
             </p>
           </div>
 
@@ -70,7 +69,7 @@
               size="large"
               @click="addToCart(productId)"
             >
-              Add to Cart
+              {{ $t('home.add_to_cart') }}
             </el-button>
           </div>
         </div>
@@ -99,7 +98,7 @@
 
     <!-- Related Products Section -->
     <div class="related-products mt-12">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Related Products</h2>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ $t('home.related_products') }}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <el-card
           v-for="relatedProduct in product.related_products"
@@ -131,7 +130,7 @@
             class="absolute bottom-4 right-4"
             @click="navigateTo(`/products/${relatedProduct.id}`)"
           >
-            View Product
+            {{ $t('home.view_details') }}
           </el-button>
         </el-card>
       </div>

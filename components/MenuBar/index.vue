@@ -4,43 +4,43 @@
       <li>
         <NuxtLink to="/"
           class="menu-hover">
-          Home
+          {{ $t('home.home') }}
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/promotion"
           class="menu-hover">
-          Promotion
+          {{ $t('home.promotion') }}
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/Products"
           class="menu-hover">
-          Products
+          {{ $t('home.products') }}
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/category"
           class="menu-hover">
-          Category
+          {{ $t('home.category') }}
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/vendor-list"
           class="menu-hover">
-          Store
+          {{ $t('home.store') }}
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/about-us"
           class="menu-hover">
-          About Us
+          {{ $t('home.about_us') }}
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/contact-us"
           class="menu-hover">
-          Contact Us
+          {{ $t('home.contact_us') }}
         </NuxtLink>
       </li>
     </ul>
