@@ -29,7 +29,7 @@ onMounted(() => {
 
 <template>
   <h1>Your History</h1>
-  <el-table :data="orders" class="w-[1000px] table">
+  <el-table :data="orders" class="table">
     <el-table-column prop="code" label="Order code" width="180" />
     <el-table-column prop="created_at" label="Date" width="280" />
     <el-table-column prop="amount" label="Total price" width="180" />
