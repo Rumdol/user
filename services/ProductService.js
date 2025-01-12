@@ -22,6 +22,7 @@ class ProductService extends BaseService {
       sort: payload.sort || null,
       page: payload.page || 1,
       per_page: payload.per_page || 16,
+      latest: payload.latest || false,
     }
 
     // Filter out null or undefined parameters
@@ -42,18 +43,14 @@ class ProductService extends BaseService {
     return await this._get(`${this._prefix}/${id}`);
   }
 
+  // Service Layer - ProductService
   async getLatestProduct(payload = {}) {
-    //per_page
-    const params = {
-      page: payload.page || 1,
-      per_page: payload.per_page || 4,
-    };
 
     // Convert the params object into a query string
-    const queryString = new URLSearchParams(params).toString();
+    const queryString = new URLSearchParams(payload).toString();
 
     // Make the API call with the query parameters
-    return await this._get(`${this._prefix}/latest?${queryString}`, {})
+    return await this._get(`${this._prefix}/all?${queryString}`, {});
   }
 
   //discounted products

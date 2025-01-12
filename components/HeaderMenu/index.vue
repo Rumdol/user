@@ -2,7 +2,7 @@
   <div>
     <!-- Header -->
     <el-affix :offset="0">
-      <header class="bg-white text-black">
+      <header class="bg-primary text-black">
         <div class="container mx-auto flex items-center justify-between p-4">
           <!-- Logo -->
           <div class="logo flex items-center">
