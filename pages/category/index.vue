@@ -1,5 +1,7 @@
 <template>
   <div class="max-w-4xl mx-auto p-6">
+    <button @click="navigateTo('')" class="p-2 bg-primary rounded w-[100px]">
+      <i class="fa-solid fa-arrow-left pr-[10px]"></i>Back</button>
     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">{{ $t('home.categories') }}</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div

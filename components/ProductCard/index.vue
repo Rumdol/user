@@ -71,26 +71,26 @@
         </div>
 
         <div class="flex items-center gap-3">
-        <!-- Quantity Selector -->
-        <div
-          class="flex items-center border border-gray-300 rounded overflow-hidden"
-        >
-          <button
-            class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 w-[50]"
-            @click="decreaseAmount"
-            :disabled="amount <= 1"
+          <!-- Quantity Selector -->
+          <div
+            class="flex items-center border border-gray-300 rounded overflow-hidden"
           >
-            -
-          </button>
-          <span class="w-12 text-center">{{ amount }}</span>
-          <button
-            class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 w-[50]"
-            @click="increaseAmount"
-            :disabled="amount >= 10"
-          >
-            +
-          </button>
-        </div>
+            <button
+              class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 w-[50]"
+              @click="decreaseAmount(product.id)"
+              :disabled="getAmount(product.id) <= 1"
+            >
+              -
+            </button>
+            <span class="w-12 text-center">{{ getAmount(product.id) }}</span>
+            <button
+              class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 w-[50]"
+              @click="increaseAmount(product.id)"
+              :disabled="getAmount(product.id) >= 10"
+            >
+              +
+            </button>
+          </div>
 
         <!-- Add to Cart Button -->
         <el-button
@@ -121,26 +121,33 @@ import { ElMessage } from 'element-plus'
 import { useCookies } from 'vue3-cookies'
 import { useCartStore } from '~/store/cart.js'
 const cartStore = useCartStore()
-// Add to cart logic
-const amount = ref(1)
+// Store quantities per product
+const productQuantities = ref({})
 
-const increaseAmount = () => {
-  if (amount.value < 10) {
-    amount.value++
+// Get the amount of a specific product
+const getAmount = (productId) => {
+  return productQuantities.value[productId] || 1
+}
+
+// Increase the quantity of a specific product
+const increaseAmount = (productId) => {
+  if (getAmount(productId) < 10) {
+    productQuantities.value[productId] = getAmount(productId) + 1
   }
 }
 
-const decreaseAmount = () => {
-  if (amount.value > 1) {
-    amount.value--
+// Decrease the quantity of a specific product
+const decreaseAmount = (productId) => {
+  if (getAmount(productId) > 1) {
+    productQuantities.value[productId] = getAmount(productId) - 1
   }
 }
 
 const addToCart = async (productId) => {
   try {
     const params = {
-      product: productId, // Pass the product ID from the route
-      count: amount.value, // Pass the quantity
+      product: productId, // Pass the product ID
+      count: getAmount(productId), // Pass the unique quantity
     }
     console.log('Adding to cart with params:', params)
 

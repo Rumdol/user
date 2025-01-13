@@ -20,6 +20,12 @@
         </NuxtLink>
       </li>
       <li>
+        <NuxtLink to="/vendor-list"
+                  class="menu-hover">
+          {{ $t('home.store') }}
+        </NuxtLink>
+      </li>
+      <li>
         <NuxtLink to="/category"
           class="menu-hover">
           {{ $t('home.category') }}
@@ -62,7 +68,7 @@ ul {
 
 li {
   font-size: 1.1rem;
-  font-family:Stencil Std, fantasy;
+  font-family: Inter, sans-serif;
 }
 .menu-hover{
   color: #000;
