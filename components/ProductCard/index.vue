@@ -54,14 +54,27 @@
       </span>
           </div>
 
+          <div v-if="product.tags" class="flex flex-wrap gap-2">
+            <el-tag
+              v-for="tag in product.tags"
+              :key="tag.id"
+              :style="{ backgroundColor: tag.color, color: 'white' }"
+              size="small"
+              effect="plain"
+              class="capitalize"
+            >
+              {{ tag.name }}
+            </el-tag>
+          </div>
+
           <h2 class="font-semibold text-lg text-gray-800 line-clamp-2 h-[60px]">
             {{ product.title }}
           </h2>
           <p class="text-sm text-gray-500">{{ $t('home.size') }} : {{ product.volume ?? 0 }} {{ $t('home.ml') }}</p>
 
           <!-- Price and Final Price -->
-          <p class="text-gray-500" v-if="product.price > product.final_price">
-            <span class="line-through">&dollar;{{ product.price }}</span>
+          <p class="text-gray-500" v-if="product.final_price">
+            <span class="line-through">&dollar;{{ product.final_price }}</span>
             <span class="ml-2 text-lg text-green-600 font-bold">&dollar;{{ product.final_price }}</span>
           </p>
 

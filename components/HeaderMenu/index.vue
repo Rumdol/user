@@ -38,18 +38,12 @@
               <!-- Wishlist -->
               <li v-if="isLogin">
                 <NuxtLink to="/wishlist">
-                  <el-badge is-dot class="item-dot">
-                    <Icon name="uil:heart" class="header-icon" />
-                  </el-badge>
                   <span class="ml-2">{{ $t('home.wishlist') }}</span>
                 </NuxtLink>
               </li>
               <!-- Cart -->
               <li v-if="isLogin">
                 <NuxtLink to="/cart">
-                  <el-badge :value="0" class="item" color="red">
-                    <Icon name="uil:cart" class="header-icon" />
-                  </el-badge>
                   <span class="ml-2">{{ $t('home.cart') }}</span>
                 </NuxtLink>
               </li>
@@ -102,11 +96,12 @@
 import { ref } from "vue";
 import { useRouter } from "nuxt/app";
 import { useAuthStore } from '~/store/auth.js';
+import { useCookies } from 'vue3-cookies'
 
 defineProps({
   isLogin: Boolean,
 });
-
+const { cookies } = useCookies()
 const searchQuery = ref("");
 const router = useRouter();
 const authStore = useAuthStore();
@@ -122,6 +117,10 @@ const search = () => {
 };
 
 onMounted(async () => {
+  const token = cookies.get('access_token')
+  if (!token) {
+    return
+  }
   try {
     user.value = await authStore.getProfile(); // Fetch user data or use cached data
   } catch (error) {

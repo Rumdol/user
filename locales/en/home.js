@@ -63,4 +63,5 @@ export default {
   related_products: 'Related Products',
 
   no_description_available: 'No description available',
+  back_home:  "Back Home",
 }
