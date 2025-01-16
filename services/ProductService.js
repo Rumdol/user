@@ -21,7 +21,7 @@ class ProductService extends BaseService {
       categories_id: payload.categories_id || null,
       sort: payload.sort || null,
       page: payload.page || 1,
-      per_page: payload.per_page || 16,
+      per_page: payload.per_page || 10,
       latest: payload.latest || false,
     }
 

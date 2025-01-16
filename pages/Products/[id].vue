@@ -21,7 +21,7 @@
           <div class="text-gray-700">
             <p><strong>{{ $t('home.gender') }}:</strong> {{ product.gender }}</p>
             <p>
-              <strong>{{ $t('home.fragrance_family') }}:</strong> {{ product.fragrance_family }}
+              <strong>{{ $t('home.category') }}:</strong> {{ product.category.name }}
             </p>
             <p><strong>{{ $t('home.volume') }}:</strong> {{ product.volume }} ml</p>
             <p><strong>{{ $t('home.product_code') }}:</strong> {{ product.product_code }}</p>
