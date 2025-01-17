@@ -73,7 +73,7 @@
 
           <!-- Price and Final Price -->
           <p class="text-gray-500 flex flex-col" v-if="product.discount">
-            <span class="text-lg text-green-600 font-bold">Discount : {{ product.discount.discount }}</span>
+            <span class="text-lg text-green-600 font-bold">Discount : {{ product.discount.discount ?? product.discount }}</span>
             <div class="flex">
               <span class="line-through">&dollar;{{ product.price }}</span>
               <span class="ml-2 text-lg text-green-600 font-bold">&dollar;{{ product.final_price }}</span>
