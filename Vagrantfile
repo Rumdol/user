@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
 
     # Manager VM configuration
     config.vm.define "ubuntu" do |ubuntu|
-      ubuntu.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
+#       ubuntu.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
       ubuntu.vm.network "private_network", ip: "192.168.33.10"
 
       ubuntu.vm.synced_folder "E:/development/admin/api/rumdul.user", "/home/vagrant"
