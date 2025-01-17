@@ -138,7 +138,10 @@ const vendorId = ref(route.params.id);
 // Fetch cart data
 const fetchCartData = async () => {
   try {
-    const data = await getCart();
+    const params = {
+      vendor_id: route.params.id, // Static vendor_id for now
+    };
+    const data = await getCart(params);
     carts.value = data.data; // Fetch cart as a simple list
   } catch (error) {
     ElMessage.error('Failed to fetch cart data. Please try again.');
