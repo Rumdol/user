@@ -206,7 +206,7 @@ const handleBuy = async () => {
         vendor_id: route.params.id,
         transaction_method: transactionMethod.value,
         transaction_id: null,
-        amount: checkoutData.value?.amount,
+        amount: carts.value[0].summary.total,
         address: info.value.address,
         phone: info.value.phone,
       };
