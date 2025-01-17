@@ -18,8 +18,8 @@
       <div class="space-y-2">
         <h3 class="font-semibold text-sm">{{ $t('home.product_type') }}</h3>
         <el-radio-group v-model="selectedType" @change="applyFilters">
-          <el-radio label="compound">{{ $t('home.discount') }}</el-radio>
-          <el-radio label="discount">{{ $t('home.compound') }}</el-radio>
+          <el-radio label="discount">{{ $t('home.discount') }}</el-radio>
+          <el-radio label="compound">{{ $t('home.compound') }}</el-radio>
           <el-radio label="compound_discount">{{ $t('home.compound_discount') }}</el-radio>
           <el-radio label="all">All</el-radio>
         </el-radio-group>

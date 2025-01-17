@@ -65,5 +65,6 @@ export default {
 
   profile: 'ប្រវត្តិរូប',
   update_profile: 'ធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូប',
-  back_home:  "ត្រឡប់ក្រោយ"
+  back_home:  "ត្រឡប់ក្រោយ",
+  visit: 'ទស្សនា',
 }

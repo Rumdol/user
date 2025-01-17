@@ -64,4 +64,6 @@ export default {
 
   no_description_available: 'No description available',
   back_home:  "Back Home",
+
+  visit: 'Visit',
 }

@@ -56,7 +56,7 @@ onMounted(() => {
       <div class="flex flex-col lg:flex-row gap-6">
         <!-- Product list -->
         <section class="w-full">
-          <h1 class="text-2xl font-bold mb-6">Product List</h1>
+          <h1 class="text-2xl font-bold mb-6">{{ $t('home.products_list') }}</h1>
           <div class="flex items-center mb-4">
             <input
               v-model="searchTerm"

@@ -96,7 +96,7 @@ onMounted(() => {
           <button
             class="bg-primary text-white hover:text-red-700 p-2 w-[100px] rounded"
             @click="navigateTo(`/vendor-detail/${vendor.slug}`)">
-            Visit
+            {{ $t('home.visit') }}
           </button>
         </li>
       </ul>
@@ -110,14 +110,14 @@ onMounted(() => {
         @click="prevPage"
         :disabled="currentPage.value === 1"
         class="bg-gray-300 text-black px-4 py-2 rounded disabled:opacity-50">
-        Previous
+        {{ $t('home.previous') }}
       </button>
       <span>Page {{ currentPage.value }} of {{ totalPages }}</span>
       <button
         @click="nextPage"
         :disabled="currentPage.value === totalPages.value"
         class="bg-gray-300 text-black px-4 py-2 rounded disabled:opacity-50">
-        Next
+        {{ $t('home.next') }}
       </button>
     </div>
   </div>
