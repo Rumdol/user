@@ -67,4 +67,8 @@ export default {
 
   visit: 'Visit',
   search_vendor: 'Search Vendor',
+
+  address: 'Address',
+  total_products: 'Total products',
+  joined_since: 'Joined since',
 }

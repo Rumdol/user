@@ -43,11 +43,11 @@ onMounted(() => {
       <img :src="vendorDetail.logo || ' '" alt="Vendor Image" class="w-[150px] h-[150px]" />
     </div>
     <div>
-      <div>Name: {{ vendorDetail.name }}</div>
-      <div>Address: {{ vendorDetail.address }}</div>
-      <div>Total products: {{ vendorDetail.total_products }}</div>
-      <div>Joined since: {{ vendorDetail.created_at }}</div>
-      <div>Email: {{ vendorDetail.email }}</div>
+      <div>{{ $t('home.name') }} : {{ vendorDetail.name }}</div>
+      <div>{{ $t('home.address') }} : {{ vendorDetail.address }}</div>
+      <div>{{ $t('home.total_products') }} : {{ vendorDetail.total_products }}</div>
+      <div>{{ $t('home.joined_since') }} : {{ vendorDetail.created_at }}</div>
+      <div>{{ $t('home.email') }} : {{ vendorDetail.email }}</div>
     </div>
   </div>
 

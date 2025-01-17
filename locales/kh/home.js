@@ -68,4 +68,8 @@ export default {
   back_home:  "ត្រឡប់ក្រោយ",
   visit: 'ទស្សនា',
   search_vendor: 'ស្វែងរកអ្នកលក់',
+
+  address: 'អាសយដ្ឋាន',
+  total_products: 'ផលិតផលសរុប',
+  joined_since: 'ចូលរួមនៅពេលណា',
 }
