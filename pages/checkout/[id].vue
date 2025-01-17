@@ -239,7 +239,7 @@ const showPaypal = async () => {
         purchase_units: [
           {
             amount: {
-              value: checkoutData.value?.amount || '0',
+              value: carts.value[0].summary.total || '0',
             },
           },
         ],
