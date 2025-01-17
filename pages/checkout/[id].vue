@@ -36,78 +36,78 @@
       </el-dialog>
 
       <!-- Cart Items -->
-      <div v-for="(item, index) in carts" :key="index" class="mb-8">
-        <h2 class="text-xl font-bold mb-4">Vendor: {{ item.vendor.name }}</h2>
-        <div class="border border-gray-200 p-4 rounded h-auto">
-          <div class="space-y-4">
-            <div v-for="(product, productIndex) in item.products" :key="productIndex" class="pb-4 flex items-center justify-between">
-              <div class="flex items-center">
-                <img :src="product.product?.image" alt="Product Image" class="w-16 h-16 object-cover rounded" />
-                <div class="ml-4">
-                  <p class="font-medium w-[300px]">{{ product.product?.title }}</p>
+      <div v-for="(item, index) in carts" :key="index"   class="mb-8">
+          <h2 class="text-xl font-bold mb-4">Vendor: {{ item.vendor.name }}</h2>
+          <div class="border border-gray-200 p-4 rounded h-auto">
+            <div class="space-y-4">
+              <div v-for="(product, productIndex) in item.products" :key="productIndex" class="pb-4 flex items-center justify-between">
+                <div class="flex items-center">
+                  <img :src="product.product?.image" alt="Product Image" class="w-16 h-16 object-cover rounded" />
+                  <div class="ml-4">
+                    <p class="font-medium w-[300px]">{{ product.product?.title }}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="text-left">
-                <div>
-                  <span>Each: ${{ product.product?.price }}</span>
+                <div class="text-left">
+                  <div>
+                    <span>Each: ${{ product.product?.price }}</span>
+                  </div>
+                  <div>
+                    <span>Amount: {{ product.count }}</span>
+                  </div>
+                  <div>
+                    <span>Total: ${{ product.product?.price * product.count }}</span>
+                  </div>
                 </div>
-                <div>
-                  <span>Amount: {{ product.count }}</span>
-                </div>
-                <div>
-                  <span>Total: ${{ product.product?.price * product.count }}</span>
-                </div>
-              </div>
-              <button class="text-red-500 hover:text-red-700 ml-4" @click="handleDelete(item.products[productIndex].id)">
-                <i class="fa-solid fa-trash"></i> Remove
-              </button>
-            </div>
-          </div>
-
-          <!-- Total -->
-          <div class="space-y-2">
-            <div class="flex justify-between font-semibold">
-              <span>Grand Total:</span>
-              <span>${{ amount = item.summary.total }}</span>
-            </div>
-            <div>
-              <el-radio-group v-model="transactionMethod">
-                <el-radio :value="'cod'">Cash</el-radio>
-                <el-radio :value="'paypal'">Paypal</el-radio>
-              </el-radio-group>
-            </div>
-          </div>
-          <button v-if="!isProcessing" @click="handleBuy" class="bg-primary text-white p-2 mt-4 rounded hover:bg-primary opacity-80">Buy</button>
-          <div class="flex w-20">
-            <div v-if="isProcessing" id="paypal-checkout"></div>
-          </div>
-          <el-dialog
-            v-model="showPaymentPopup"
-            title="Order Complete"
-            width="40%"
-            :close-on-click-modal="false"
-            :close-on-press-escape="false"
-            :show-close="false"
-            class="flex flex-col items-center justify-center"
-          >
-            <div class="fixed inset-0 flex items-center justify-center bg-gray-100">
-              <div class="flex flex-col justify-center items-center w-[300px] h-[200px] bg-white rounded shadow-lg p-6">
-                <div class="icon border border-green-200 w-[50px] h-[50px] flex justify-center items-center rounded-full">
-                  <i class="fa-solid fa-check text-green-500 text-xl"></i>
-                </div>
-                <p class="text-green-500 text-2xl font-bold mb-4 text-center">
-                  Payment completed successfully!
-                </p>
-                <button
-                  class=" text-white bg-primary py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
-                  @click="handleClosePopup">
-                  OK
+                <button class="text-red-500 hover:text-red-700 ml-4" @click="handleDelete(item.products[productIndex].id)">
+                  <i class="fa-solid fa-trash"></i> Remove
                 </button>
               </div>
             </div>
-          </el-dialog>
+
+            <!-- Total -->
+            <div class="space-y-2">
+              <div class="flex justify-between font-semibold">
+                <span>Grand Total:</span>
+                <span>${{ amount = item.summary.total }}</span>
+              </div>
+              <div>
+                <el-radio-group v-model="transactionMethod">
+                  <el-radio :value="'cod'">Cash</el-radio>
+                  <el-radio :value="'paypal'">Paypal</el-radio>
+                </el-radio-group>
+              </div>
+            </div>
+            <button v-if="!isProcessing" @click="handleBuy" class="bg-primary text-white p-2 mt-4 rounded hover:bg-primary opacity-80">Buy</button>
+            <div class="flex w-20">
+              <div v-if="isProcessing" id="paypal-checkout"></div>
+            </div>
+            <el-dialog
+              v-model="showPaymentPopup"
+              title="Order Complete"
+              width="40%"
+              :close-on-click-modal="false"
+              :close-on-press-escape="false"
+              :show-close="false"
+              class="flex flex-col items-center justify-center"
+            >
+              <div class="fixed inset-0 flex items-center justify-center bg-gray-100">
+                <div class="flex flex-col justify-center items-center w-[300px] h-[200px] bg-white rounded shadow-lg p-6">
+                  <div class="icon border border-green-200 w-[50px] h-[50px] flex justify-center items-center rounded-full">
+                    <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                  </div>
+                  <p class="text-green-500 text-2xl font-bold mb-4 text-center">
+                    Payment completed successfully!
+                  </p>
+                  <button
+                    class=" text-white bg-primary py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
+                    @click="handleClosePopup">
+                    OK
+                  </button>
+                </div>
+              </div>
+            </el-dialog>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -133,14 +133,13 @@ const info = ref({
   address: ''
 });
 const router = useRouter(); // Define the router
-const vendorId = ref(null);
+const vendorId = ref(route.params.id);
 
 // Fetch cart data
 const fetchCartData = async () => {
   try {
     const data = await getCart();
     carts.value = data.data; // Fetch cart as a simple list
-    console.log(carts.value)
   } catch (error) {
     ElMessage.error('Failed to fetch cart data. Please try again.');
     console.error('Error fetching cart data:', error);
@@ -200,7 +199,6 @@ const handleBuy = async () => {
   // Handle Cash on Delivery (COD)
   if (transactionMethod.value === 'cod') {
     try {
-      console.log(vendorId.value)
       const details = {
         vendor_id: route.params.id,
         transaction_method: transactionMethod.value,

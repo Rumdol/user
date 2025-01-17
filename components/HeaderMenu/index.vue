@@ -97,7 +97,6 @@ import { ref } from "vue";
 import { useRouter } from "nuxt/app";
 import { useAuthStore } from '~/store/auth.js';
 import { useCookies } from 'vue3-cookies'
-
 defineProps({
   isLogin: Boolean,
 });
