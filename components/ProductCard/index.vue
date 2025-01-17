@@ -66,15 +66,18 @@
             </el-tag>
           </div>
 
-          <h2 class="font-semibold text-lg text-gray-800 line-clamp-2 h-[60px]">
+          <h2 class="font-semibold text-lg text-gray-800 line-clamp-2">
             {{ product.title }}
           </h2>
           <p class="text-sm text-gray-500">{{ $t('home.size') }} : {{ product.volume ?? 0 }} {{ $t('home.ml') }}</p>
 
           <!-- Price and Final Price -->
-          <p class="text-gray-500" v-if="product.discount">
-            <span class="line-through">&dollar;{{ product.price }}</span>
-            <span class="ml-2 text-lg text-green-600 font-bold">&dollar;{{ product.final_price }}</span>
+          <p class="text-gray-500 flex flex-col" v-if="product.discount">
+            <span class="text-lg text-green-600 font-bold">Discount : {{ product.discount }}</span>
+            <div class="flex">
+              <span class="line-through">&dollar;{{ product.price }}</span>
+              <span class="ml-2 text-lg text-green-600 font-bold">&dollar;{{ product.final_price }}</span>
+            </div>
           </p>
 
           <p class="text-lg text-green-600 font-bold" v-else>
