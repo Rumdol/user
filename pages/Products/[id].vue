@@ -204,6 +204,10 @@ const addToCart = async () => {
 }
 
 const fetchWishlist = async (param) => {
+  const token = cookies.get('access_token')
+  if (!token) {
+    return
+  }
   try {
     const data = await wishlistStore.getWishlist(param)
     wishlist.value = data.products
