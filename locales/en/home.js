@@ -66,4 +66,5 @@ export default {
   back_home:  "Back Home",
 
   visit: 'Visit',
+  search_vendor: 'Search Vendor',
 }

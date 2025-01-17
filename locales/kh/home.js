@@ -67,4 +67,5 @@ export default {
   update_profile: 'ធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូប',
   back_home:  "ត្រឡប់ក្រោយ",
   visit: 'ទស្សនា',
+  search_vendor: 'ស្វែងរកអ្នកលក់',
 }

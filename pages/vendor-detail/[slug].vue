@@ -62,7 +62,7 @@ onMounted(() => {
               v-model="searchTerm"
               @input="handleSearch"
               type="text"
-              placeholder="Search products..."
+              :placeholder="$t('home.search_products')"
               class="border rounded-md p-2 mr-4"
             />
           </div>

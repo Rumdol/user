@@ -66,7 +66,7 @@ onMounted(() => {
     <input
       v-model="searchQuery"
       type="text"
-      placeholder="Search vendors..."
+      :placeholder="$t('home.search_vendor')"
       @input="searchVendors"
       class="border rounded px-4 py-2 w-full max-w-xs"
     />
