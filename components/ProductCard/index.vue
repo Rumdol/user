@@ -28,7 +28,6 @@
           />
         </svg>
       </div>
-      {{product}}
       <!-- Image Section -->
       <div class="relative h-72">
         <img
