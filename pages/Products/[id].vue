@@ -28,11 +28,18 @@
           </div>
 
           <div>
-            <p class="text-green-600 text-2xl font-bold">
-              {{ $t('home.price') }}: &dollar;{{ product.price }}
+            <p v-if="product.discount" class="text-red-500">
+              <p class="text-lg font-bold line-through text-black">
+                {{ $t('home.price') }}: &dollar;{{ product.price }}
+              </p>
+              <p class="text-green-600 text-2xl font-bold">
+                {{ $t('home.price') }}: &dollar;{{ product.final_price }}
+              </p>
+              {{ $t('home.discount') }}: {{ product.discount.discount }}%
             </p>
-            <p v-if="product.discount > 0" class="text-red-500">
-              {{ $t('home.discount') }}: {{ product.discount }}%
+
+            <p v-else class="text-green-600 text-2xl font-bold">
+              {{ $t('home.price') }}: &dollar;{{ product.price }}
             </p>
           </div>
 

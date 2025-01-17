@@ -72,7 +72,7 @@
           <p class="text-sm text-gray-500">{{ $t('home.size') }} : {{ product.volume ?? 0 }} {{ $t('home.ml') }}</p>
 
           <!-- Price and Final Price -->
-          <p class="text-gray-500" v-if="product.final_price">
+          <p class="text-gray-500" v-if="product.discount">
             <span class="line-through">&dollar;{{ product.price }}</span>
             <span class="ml-2 text-lg text-green-600 font-bold">&dollar;{{ product.final_price }}</span>
           </p>
