@@ -75,6 +75,68 @@
           </form>
         </div>
       </div>
+
+      <!-- Update Password Section -->
+      <div class="mt-6 w-full">
+        <button
+          @click="togglePasswordEditMode"
+          class="w-full py-2 px-4 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+        >
+          {{ passwordEditMode ? 'Cancel Password Edit' : 'Change Password' }}
+        </button>
+
+        <div v-if="passwordEditMode" class="mt-4">
+          <h3 class="text-lg font-semibold mb-2">Change Password</h3>
+          <form @submit.prevent="handleUpdatePassword">
+            <div class="mb-4">
+              <label for="oldPassword" class="block text-sm font-medium text-gray-700">Old Password</label>
+              <input
+                v-model="updatePasswordForm.oldPassword"
+                type="password"
+                id="oldPassword"
+                class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                placeholder="Enter old password"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+              <input
+                v-model="updatePasswordForm.newPassword"
+                type="password"
+                id="newPassword"
+                class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                placeholder="Enter new password"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+              <input
+                v-model="updatePasswordForm.confirmPassword"
+                type="password"
+                id="confirmPassword"
+                class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                placeholder="Confirm new password"
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            >
+              Change Password
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Logout Button -->
+      <div class="mt-6 w-full">
+        <button
+          @click="handleLogout"
+          class="w-full py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+        >
+          Logout
+        </button>
+      </div>
     </div>
 
     <!-- Loading State -->
@@ -99,7 +161,15 @@ const userForm = ref({
   age: '',
   image: null,
 });
+
+const updatePasswordForm = ref({
+  oldPassword: '',
+  newPassword: '',
+  confirmPassword: '',
+});
+
 const editMode = ref(false); // Controls if the user is in edit mode
+const passwordEditMode = ref(false); // Controls if the user is editing password
 
 // Fetch user profile
 const fetchProfile = async () => {
@@ -133,6 +203,26 @@ const handleUpdate = async () => {
   }
 };
 
+const handleLogout = async () => {
+  await authStore.logout();
+  navigateTo('/sign-in');
+};
+
+// Handle update password
+const handleUpdatePassword = async () => {
+  const response = await authStore.updatePassword({
+    old_password: updatePasswordForm.value.oldPassword,
+    password: updatePasswordForm.value.newPassword,
+    password_confirmation: updatePasswordForm.value.confirmPassword,
+  });
+  if (response) {
+    ElMessage.success('Password updated successfully');
+    togglePasswordEditMode();
+  } else {
+    ElMessage.error('Failed to update password');
+  }
+};
+
 // Handle image upload
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
@@ -144,6 +234,11 @@ const handleImageUpload = (event) => {
 // Toggle edit mode
 const toggleEditMode = () => {
   editMode.value = !editMode.value;
+};
+
+// Toggle password edit mode
+const togglePasswordEditMode = () => {
+  passwordEditMode.value = !passwordEditMode.value;
 };
 
 onMounted(() => {

@@ -77,12 +77,11 @@ export const useAuthStore = defineStore('auth', () => {
   const logout = () => {
     user.value = null
     token.value = null
-
+    authService.logout()
     cookies.remove('access_token')
     cookies.remove('user')
     cookies.remove('tokenType')
     //logout
-    authService.logout()
   }
 
   //getProfile
@@ -113,6 +112,32 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  //resetPassword
+  const resetPassword = async (credentials) => {
+    try {
+      const { status } = await authService.resetPassword(credentials)
+      if (!status) {
+        throw new Error('No data returned')
+      }
+      return status
+    } catch (error) {
+      throw error
+    }
+  }
+
+  //updatePassword
+  const updatePassword = async (credentials) => {
+    try {
+      const { status } = await authService.updatePassword(credentials)
+      if (!status) {
+        throw new Error('No data returned')
+      }
+      return status
+    } catch (error) {
+      throw error
+    }
+  }
+
   return {
     user: computed(() => user.value),
     token,
@@ -122,5 +147,7 @@ export const useAuthStore = defineStore('auth', () => {
     getMe,
     getProfile,
     editProfile,
+    resetPassword,
+    updatePassword
   }
 })

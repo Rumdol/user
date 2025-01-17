@@ -32,12 +32,6 @@
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/vendor-list"
-          class="menu-hover">
-          {{ $t('home.store') }}
-        </NuxtLink>
-      </li>
-      <li>
         <NuxtLink to="/about-us"
           class="menu-hover">
           {{ $t('home.about_us') }}
