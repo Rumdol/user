@@ -22,8 +22,8 @@
         :before-close="handleClose"
       >
         <el-form :model="info" ref="addressForm" label-width="120px">
-          <el-form-item label="Phone Number" prop="phone" :rules="[{ required: true, message: 'Please enter your phone number', trigger: 'blur' }]">
-            <el-input v-model="info.phone" placeholder="Enter your phone number" clearable />
+          <el-form-item label="Phone Number" prop="phone" :rules="[{ required: true, message: 'Please enter your phone number', trigger: 'blur', type: 'number' }]">
+            <el-input v-model.number="info.phone" placeholder="Enter your phone number" clearable />
           </el-form-item>
           <el-form-item label="Address" prop="address" :rules="[{ required: true, message: 'Please enter your address', trigger: 'blur' }]">
             <el-input v-model="info.address" placeholder="Enter your address" clearable />
@@ -255,7 +255,7 @@ const showPaypal = async () => {
           vendor_id: route.params.id,
           transaction_method: transactionMethod.value,
           transaction_id: details.id,
-          amount: checkoutData.value?.amount,
+          amount: carts.value[0].summary.total,
           address: info.value.address,
           phone: info.value.phone,
         };
